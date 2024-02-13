@@ -1,4 +1,4 @@
-package com.seniormeet.Entidades;
+package com.seniormeet.EntidadesModels;
 
 import java.time.LocalDateTime;
 
