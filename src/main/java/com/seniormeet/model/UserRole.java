@@ -1,4 +1,4 @@
-package com.seniormeet.Entidades;
+package com.seniormeet.model;
 
 public enum UserRole {
 

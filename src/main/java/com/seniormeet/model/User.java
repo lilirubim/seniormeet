@@ -1,4 +1,4 @@
-package com.seniormeet.Entidades;
+package com.seniormeet.model;
 
 import java.util.ArrayList;
 import java.util.List;
