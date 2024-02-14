@@ -1,4 +1,4 @@
-package com.seniormeet.EntidadesModels;
+package com.seniormeet.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

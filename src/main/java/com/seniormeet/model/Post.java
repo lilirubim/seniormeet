@@ -1,4 +1,4 @@
-package com.seniormeet.EntidadesModels;
+package com.seniormeet.model;
 
 public class Post {
 
