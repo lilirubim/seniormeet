@@ -16,4 +16,5 @@ public class Group {
     private String rules;
     private String photoUrl;
 
+
 }
