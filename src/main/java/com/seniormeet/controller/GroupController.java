@@ -26,7 +26,7 @@ public class GroupController {
         List<Group> groups = groupService.findGroup();
         return ResponseEntity.ok(groups);
     }
-
+    // hay que agregar get bean
     @GetMapping("{id}")
     public ResponseEntity<Group> findById(@PathVariable Long id){
         Group group = groupService.findById(id);
