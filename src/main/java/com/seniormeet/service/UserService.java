@@ -12,4 +12,10 @@ public interface UserService {
     List<User> findUsers();
 
     User findById(Long id);
+
+    User createUser(User user);
+
+    User updateUser(Long id, User user);
+
+    boolean deleteUser(Long id);
 }
