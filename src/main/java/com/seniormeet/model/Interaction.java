@@ -1,12 +1,21 @@
 package com.seniormeet.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-// entidad intermedia entre User y Post
+
 @Entity
-@Table(name = "sm_interaction")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
+// entidad intermedia entre User y Post
+@Table(name = "interactions")
 public class Interaction {
 
     @Id
@@ -25,7 +34,15 @@ public class Interaction {
     private String comment;
     private LocalDateTime commetDate;
 
-    //private User user;
-    //private Post post;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
+    // asociación interacciones de users ?
+    @ManyToMany
+    @ToString.Exclude
+    private List<User> users = new ArrayList<>();
 }
