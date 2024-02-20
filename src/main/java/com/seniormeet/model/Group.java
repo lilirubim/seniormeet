@@ -26,7 +26,7 @@ public class Group {
     private String photoUrl;
 
     private String user;
-    //puse esto para relacionar con USUARIO
+    //puse esto para relacionar con USUARIO fgfg
     @ManyToMany
     private List<User> users = new ArrayList<>();
 }
