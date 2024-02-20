@@ -1,10 +1,16 @@
 package com.seniormeet.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "sm_group")
 public class Group {
