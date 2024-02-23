@@ -22,8 +22,9 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
-    public Hobby findById(Long Id) {
-        return null;
+    public Hobby findById(Long id) {
+
+        return hobbyRepository.findById(id).orElse(null);
     }
 
 
