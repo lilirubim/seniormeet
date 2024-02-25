@@ -1,17 +1,18 @@
 package com.seniormeet.controller;
 
 import com.seniormeet.model.Interaction;
+import com.seniormeet.repository.InteractionRepository;
 import com.seniormeet.service.InteractionService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/interaction")
+
 public class InteractionController {
 
     private InteractionService interactionService;
@@ -29,6 +30,23 @@ public class InteractionController {
         return ResponseEntity.ok(interaction);
 
     }
+
+    private InteractionRepository repo;
+    @PostMapping("create-interaction")
+    public ResponseEntity<Interaction> create(@RequestBody Interaction interaction) {
+
+        return ResponseEntity.ok(repo.save(interaction));
+    }
+    @PutMapping("interaction/{id}")
+    public Interaction update(@RequestBody Interaction interaction, @PathVariable Long id){
+        return repo.save(interaction);
+    }
+    @DeleteMapping("interaction/{id}")
+    public void delete(@PathVariable Long id){
+        repo.deleteById(id);
+    }
+
+
 
 
 }

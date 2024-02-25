@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 // entidad intermedia entre User y Post
-@Table(name = "interactions")
+@Table(name = "sm_interaction")
 public class Interaction {
 
     @Id
