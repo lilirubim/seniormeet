@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 // entidad intermedia entre User y Post
-@Table(name = "interactions")
+@Table(name = "sm_interaction")
 public class Interaction {
 
     @Id
@@ -32,7 +32,7 @@ public class Interaction {
     private LocalDateTime savedDate;
 
     private String comment;
-    private LocalDateTime commetDate;
+    private LocalDateTime commentDate;
 
     @OneToOne
     @JoinColumn(name = "user_id")
