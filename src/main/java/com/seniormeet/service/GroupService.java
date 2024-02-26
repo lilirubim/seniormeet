@@ -12,4 +12,11 @@ public interface GroupService {
     List<Group> findGroup();
 
     Group findById(Long id);
+
+    Group save(Group group);
+
+    Group updateGroup(Long id, Group group);
+
+    boolean deleteGroup(Long id);
+
 }
