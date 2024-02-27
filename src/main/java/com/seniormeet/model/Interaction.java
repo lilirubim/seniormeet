@@ -32,7 +32,7 @@ public class Interaction {
     private LocalDateTime savedDate;
 
     private String comment;
-    private LocalDateTime commetDate;
+    private LocalDateTime commentDate;
 
     @OneToOne
     @JoinColumn(name = "user_id")

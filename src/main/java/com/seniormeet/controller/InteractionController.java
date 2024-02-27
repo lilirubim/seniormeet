@@ -31,21 +31,25 @@ public class InteractionController {
 
     }
 
-    private InteractionRepository repo;
-    @PostMapping("create-interaction")
+
+    @PostMapping("/create")
     public ResponseEntity<Interaction> create(@RequestBody Interaction interaction) {
 
-        return ResponseEntity.ok(repo.save(interaction));
+        return ResponseEntity.ok(interactionService.save(interaction));
     }
-    @PutMapping("interaction/{id}")
+    @PutMapping("/{id}")
     public Interaction update(@RequestBody Interaction interaction, @PathVariable Long id){
-        return repo.save(interaction);
+        return interactionService.save(id, interaction);
     }
-    @DeleteMapping("interaction/{id}")
-    public void delete(@PathVariable Long id){
-        repo.deleteById(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteInteraction(@PathVariable Long id) {
+        boolean deleted = interactionService.deleteInteraction(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 
 
 
