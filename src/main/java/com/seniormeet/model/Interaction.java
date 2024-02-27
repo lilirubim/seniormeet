@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -15,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 // entidad intermedia entre User y Post
-@Table(name = "interactions")
+@Table(name = "sm_interaction")
 public class Interaction {
 
     @Id
@@ -32,17 +30,14 @@ public class Interaction {
     private LocalDateTime savedDate;
 
     private String comment;
-    private LocalDateTime commetDate;
+    private LocalDateTime commentDate;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @OneToOne
-    @JoinColumn(name = "post_id")
+    //@ManyToOne
+    //@JoinColumn(name = "post_id")
     private Post post;
 
-    // asociación interacciones de users ?
-    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private List<User> users = new ArrayList<>();
+    private User users;
 }

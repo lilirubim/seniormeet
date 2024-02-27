@@ -25,8 +25,8 @@ public class Group {
     private String rules;
     private String photoUrl;
 
-    private String user;
-    //puse esto para relacionar con USUARIO fgfg
-    @ManyToMany
+    //private User user;
+
+    @ManyToMany(mappedBy = "groupList")
     private List<User> users = new ArrayList<>();
 }

@@ -1,35 +1,40 @@
 package com.seniormeet;
 
-import com.seniormeet.model.Hobby;
-import com.seniormeet.repository.HobbyRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.util.List;
-
-
 
 @SpringBootApplication
 public class SeniormeetApplication {
 
 	public static void main(String[] args) {
 
-
 		ApplicationContext context = SpringApplication.run(SeniormeetApplication.class, args);
-		HobbyRepository repo = context.getBean(HobbyRepository.class);
+/*
+		InteractionRepository interactionRepo = context.getBean(InteractionRepository.class);
+		Interaction interaction1 = new Interaction(null, true, LocalDateTime.now(), false, LocalDateTime.now(), false, LocalDateTime.now(), "enhorabuena", LocalDateTime.now(), null, null, List.of());
+		Interaction interaction2 = new Interaction(null, true, LocalDateTime.now(), true, LocalDateTime.now(), false, LocalDateTime.now(), "guapo", LocalDateTime.now(), null, null, List.of());
+		Interaction interaction3 = new Interaction(null, true, LocalDateTime.now(), true, LocalDateTime.now(), true, LocalDateTime.now(), "felicidades", LocalDateTime.now(), null, null, List.of());
 
-		// CRUD: CREATE y UPDATE con el método save()
-		Hobby bailar = new Hobby(null, "Bailar", "Bailar ritmos latinos");
-		Hobby pasear = new Hobby(null, "Pasear", "Dar una vuelta por la ciudad");
-		Hobby tapear = new Hobby(null, "Tapear", "Tapeamos los viernes");
-		Hobby animales = new Hobby(null, "animales", "Me gustan los animales");
+		interactionRepo.saveAll(List.of(interaction1, interaction2, interaction3));
+
+		GroupRepository groupRepo = context.getBean(GroupRepository.class);
+		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", null, "1", List.of());
+		Group group2 = new Group(null, "Cultura", "Cine, teatro, espectáculos, museos", "sin alcohol", null, "2", List.of());
+
+		groupRepo.saveAll(List.of(group1,group2));
 
 
-		repo.saveAll(List.of(bailar, pasear, tapear, animales));
 
 
+		HobbyRepository hobbyRepo = context.getBean(HobbyRepository.class);
+
+		Hobby hobby1 = new Hobby(null, "Balar Merengue", "divertida clase de Merengue ");
+		Hobby hobby2 = new Hobby(null, "Paseo por el Retiro","lunes por la mañana a las 10 ");
+		Hobby hobby3 = new Hobby(null, "Salida al Teatro", "dia 29 de febrero a las 19 h ");
+		hobbyRepo.saveAll(List.of(hobby1, hobby2, hobby3));
+
+ */
 	}
 
 }
-

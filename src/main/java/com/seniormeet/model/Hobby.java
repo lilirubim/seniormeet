@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,5 +23,8 @@ public class Hobby {
     private String name;
 
     private String description;
+
+    @ManyToMany(mappedBy = "hobbyList")
+    private List<User> users = new ArrayList<>();
 
 }
