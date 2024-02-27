@@ -9,6 +9,7 @@ INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES
 INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user6@example.com', 'Charlie', 'Davis', 'passhij', '1231231234', 'USER');
 INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user7@example.com', 'Grace', 'Martinez', 'passklm', '4564564567', 'USER');
 INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user8@example.com', 'Frank', 'Garcia', 'passnop', '7897897890', 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user10@example.com', 'Tony', 'Graciano', 'passnop', '3897897890', 'USER');
 #sm_group
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Group for hiking enthusiasts', 'hiking.jpg', 'Respect nature and leave no trace behind', 'Hiking Group');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Photography lovers community', 'photography.jpg', 'Share your best shots and tips', 'Photography Club');
@@ -31,6 +32,18 @@ INSERT INTO sm_hobby (description, name) VALUES ('Staying fit and active through
 INSERT INTO sm_hobby (description, name) VALUES ('Traveling to new destinations and experiencing different cultures', 'Travel');
 INSERT INTO sm_hobby (description, name) VALUES ('Advocating for environmental sustainability and eco-friendly practices', 'Sustainability');
 INSERT INTO sm_hobby (description, name) VALUES ('Exploring and learning about new technologies and coding', 'Tech');
+#sm_post
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Great content', 'https://example.com/photo1.jpg', null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Interesting article', null, null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Check out this video!', null, 'https://example.com/video1.mp4');
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('New product announcement', 'https://example.com/product.jpg', null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Exciting news!', null, null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Funny meme', 'https://example.com/meme.jpg', null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Important update', null, null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Event reminder', 'https://example.com/event.jpg', null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Thought-provoking quote', null, null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Friday!', null, null);
+INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Halloween!', null, null);
 #sm_interaction
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (1, 0, 1, '2022-01-01 12:00:00.000000', '2022-01-02 12:00:00.000000', 1, '2022-01-03 12:00:00.000000', '2022-01-04 12:00:00.000000', 1, 'Great post!');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (0, 1, 0, '2022-01-02 12:00:00.000000', null, 2, '2022-01-04 12:00:00.000000', null, 2, 'Interesting content');
@@ -41,4 +54,4 @@ INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (0, 0, 1, '2022-01-07 12:00:00.000000', null, 7, null, '2022-01-10 12:00:00.000000', 7, 'Sharing this with my friends');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (1, 1, 1, '2022-01-08 12:00:00.000000', '2022-01-10 12:00:00.000000', 8, '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000', 8, 'Incredible!');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (0, 1, 0, '2022-01-09 12:00:00.000000', null, 9, '2022-01-13 12:00:00.000000', null, 9, 'Interesting read');
-INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (1, 0, 1, '2022-01-10 12:00:00.000000', '2022-01-12 12:00:00.000000',
+INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, post_id, saved_date, shared_date, user_id, comment) VALUES (1, 0, 1, '2022-01-10 12:00:00.000000', '2022-01-12 12:00:00.000000', 10, '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000', 10, 'Incredible!');

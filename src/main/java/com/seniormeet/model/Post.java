@@ -3,6 +3,8 @@ package com.seniormeet.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,8 +30,8 @@ public class Post {
     @OneToOne
     private User user;
 
-    //@OneToMany
-    //List<Interaction> interactions;
+    @OneToMany
+    List<Interaction> interactions;
 
     //@OneToMany
     //List<Comment> comments;

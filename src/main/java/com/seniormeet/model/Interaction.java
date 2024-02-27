@@ -32,8 +32,8 @@ public class Interaction {
     private String comment;
     private LocalDateTime commentDate;
 
-    //@ManyToOne
-    //@JoinColumn(name = "post_id")
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
