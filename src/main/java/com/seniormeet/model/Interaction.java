@@ -34,15 +34,12 @@ public class Interaction {
     private String comment;
     private LocalDateTime commentDate;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @OneToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
 
-    // asociación interacciones de users ?
-    @ManyToMany
-    @ToString.Exclude
-    private List<User> users = new ArrayList<>();
+
 }
