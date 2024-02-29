@@ -1,7 +1,8 @@
 package com.seniormeet.service;
 
+import com.seniormeet.model.Group;
+import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -18,4 +19,12 @@ public interface UserService {
     User updateUser(Long id, User user);
 
     boolean deleteUser(Long id);
+
+    void addUserToGroup(Long userId, Long groupId);
+
+    List<Group> getUserGroups(Long userId);
+
+    List<Hobby> getUserHobbies(Long userId);
+
+    void addHobbyToUser(Long userId, Long hobbtId);
 }

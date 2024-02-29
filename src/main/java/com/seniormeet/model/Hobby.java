@@ -1,10 +1,8 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +17,11 @@ public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private String description;
 
-    @ManyToMany(mappedBy = "hobbyList")
+    @ManyToMany(mappedBy = "hobbies")
+    @JsonIgnore
+    @ToString.Exclude
     private List<User> users = new ArrayList<>();
-
 }

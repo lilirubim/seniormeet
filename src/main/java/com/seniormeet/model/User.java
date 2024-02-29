@@ -1,5 +1,6 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,20 +34,27 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private List<Group> groupList = new ArrayList<>();
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Group> groups = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "sm_user_hobbies",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
-    private List<Hobby> hobbyList = new ArrayList<>();
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Hobby> hobbies = new ArrayList<>();
 
     @OneToMany
-    private List<Interaction> interactionList = new ArrayList<>();
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Interaction> interactions = new ArrayList<>();
 
     @OneToMany
-    private List<Post> post = new ArrayList<>();
-
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Post> posts = new ArrayList<>();
 
 }
