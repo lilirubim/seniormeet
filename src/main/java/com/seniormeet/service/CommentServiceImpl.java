@@ -2,12 +2,10 @@ package com.seniormeet.service;
 
 import com.seniormeet.model.Comment;
 import com.seniormeet.repository.CommentRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;

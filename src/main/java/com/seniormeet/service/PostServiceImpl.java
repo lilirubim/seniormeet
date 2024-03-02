@@ -2,12 +2,10 @@ package com.seniormeet.service;
 
 import com.seniormeet.model.Post;
 import com.seniormeet.repository.PostRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class PostServiceImpl implements PostService{
 
     private PostRepository postRepository;
