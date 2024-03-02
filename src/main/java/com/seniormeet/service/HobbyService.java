@@ -9,4 +9,10 @@ public interface HobbyService {
     public Hobby findById(Long Id);
 
 
+    Hobby updateHobby(Long id, Hobby hobby);
+
+    Hobby save(Hobby hobby);
+
+    boolean deleteHobby(Long id);
+
 }

@@ -1,10 +1,12 @@
 package com.seniormeet.service;
 
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.User;
 import com.seniormeet.repository.InteractionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -22,4 +24,48 @@ public class InteractionServiceImpl implements InteractionService{
 
     @Override
     public Interaction findById(Long id) {return interactionRepository.findById(id).orElse(null); }
+
+    @Override
+    public Interaction save(Interaction interaction) {
+        return interactionRepository.save(interaction);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        interactionRepository.deleteById(id);
+
+    }
+
+    @Override
+    public Interaction save(Long id, Interaction interaction) {
+        Optional<Interaction> interactionOptional = interactionRepository.findById(id);
+        if (interactionOptional.isPresent()) {
+            Interaction existingInteraction = interactionOptional.get();
+            existingInteraction.setLiked(interaction.getLiked());
+            existingInteraction.setLikedDate(interaction.getLikedDate());
+            existingInteraction.setShared(interaction.getShared());
+            existingInteraction.setSharedDate(interaction.getSharedDate());
+            existingInteraction.setSaved(interaction.getSaved());
+            existingInteraction.setSavedDate(interaction.getSavedDate());
+            existingInteraction.setComment(interaction.getComment());
+            existingInteraction.setCommentDate(interaction.getCommentDate());
+
+            // Actualizar otras propiedades según sea necesario
+            return interactionRepository.save(existingInteraction);
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public boolean deleteInteraction(Long id) {
+        Optional<Interaction> interactionOptional = interactionRepository.findById(id);
+        if (interactionOptional.isPresent()) {
+            interactionRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
