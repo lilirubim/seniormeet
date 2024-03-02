@@ -1,6 +1,6 @@
 package com.seniormeet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class Hobby {
     private String description;
 
     @ManyToMany(mappedBy = "hobbies")
-    @JsonIgnore
+    @JsonIgnoreProperties("hobbies, groups")
     @ToString.Exclude
     private List<User> users = new ArrayList<>();
 }

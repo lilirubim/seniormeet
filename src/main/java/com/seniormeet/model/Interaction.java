@@ -1,9 +1,11 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -32,12 +34,12 @@ public class Interaction {
     private String comment;
     private LocalDateTime commentDate;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @ManyToMany(mappedBy = "interactions")
+    @JsonIgnoreProperties("interactions")
+    private List<Post> posts;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private User users;
+    private User user;
 }

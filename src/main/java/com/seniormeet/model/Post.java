@@ -1,5 +1,6 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,10 +28,17 @@ public class Post {
     @OneToOne
     private Group group;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "sm_post_interactions",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "interaction_id")
+    )
+    @JsonIgnoreProperties("posts")
+    @ToString.Exclude
     List<Interaction> interactions;
 
     //@OneToMany

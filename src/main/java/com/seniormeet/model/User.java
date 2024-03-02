@@ -1,6 +1,6 @@
 package com.seniormeet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +19,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
     private String lastName;
     private String email;
@@ -34,7 +33,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    @JsonIgnore
+    @JsonIgnoreProperties("users")
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
@@ -43,17 +42,15 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
-    @JsonIgnore
+    @JsonIgnoreProperties("users")
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
     @OneToMany
-    @JsonIgnore
     @ToString.Exclude
     private List<Interaction> interactions = new ArrayList<>();
 
     @OneToMany
-    @JsonIgnore
     @ToString.Exclude
     private List<Post> posts = new ArrayList<>();
 
