@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -34,12 +35,16 @@ public class Interaction {
     private String comment;
     private LocalDateTime commentDate;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//    @OneToOne
-//    @JoinColumn(name = "post_id")
-//    private Post post;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @ManyToMany
+    @JoinTable(
+            name = "Post_Interaction",
+            joinColumns = @JoinColumn(name = "interaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private Set<Post> posts;
 
 }
