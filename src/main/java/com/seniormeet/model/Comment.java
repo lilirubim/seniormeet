@@ -18,6 +18,5 @@ public class Comment {
 
     String content;
 
-    @OneToOne
-    User user;
+
 }
