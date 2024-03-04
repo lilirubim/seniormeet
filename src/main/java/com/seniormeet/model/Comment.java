@@ -18,5 +18,9 @@ public class Comment {
 
     String content;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    User user;
+
 
 }

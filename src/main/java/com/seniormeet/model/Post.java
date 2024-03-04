@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -41,7 +42,7 @@ public class Post {
     @ToString.Exclude
     List<Interaction> interactions;
 
-    //@OneToMany
-    //List<Comment> comments;
+    @OneToMany
+    List<Comment> comments = new ArrayList<>();
 
 }
