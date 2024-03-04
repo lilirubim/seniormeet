@@ -40,7 +40,7 @@ public class Post {
     )
     @JsonIgnoreProperties("posts")
     @ToString.Exclude
-    List<Interaction> interactions;
+    List<Interaction> interactions = new ArrayList<>();
 
     @OneToMany
     List<Comment> comments = new ArrayList<>();
