@@ -1,12 +1,12 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 
 @Entity
@@ -32,19 +32,17 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
-    private String comment;
-    private LocalDateTime commentDate;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnoreProperties("interactions")
     @ManyToMany
     @JoinTable(
             name = "Post_Interaction",
             joinColumns = @JoinColumn(name = "interaction_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
-    private Set<Post> posts;
+    private List<Post> posts;
 
 }

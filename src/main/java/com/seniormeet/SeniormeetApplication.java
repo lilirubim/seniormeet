@@ -22,12 +22,7 @@ public class SeniormeetApplication {
 
 		ApplicationContext context = SpringApplication.run(SeniormeetApplication.class, args);
 
-		InteractionRepository interactionRepo = context.getBean(InteractionRepository.class);
-		Interaction interaction1 = new Interaction(null, true, LocalDateTime.now(), false, LocalDateTime.now(), false, LocalDateTime.now(), "enhorabuena", LocalDateTime.now(), null, null, List.of());
-		Interaction interaction2 = new Interaction(null, true, LocalDateTime.now(), true, LocalDateTime.now(), false, LocalDateTime.now(), "guapo", LocalDateTime.now(), null, null, List.of());
-		Interaction interaction3 = new Interaction(null, true, LocalDateTime.now(), true, LocalDateTime.now(), true, LocalDateTime.now(), "felicidades", LocalDateTime.now(), null, null, List.of());
 
-		interactionRepo.saveAll(List.of(interaction1, interaction2, interaction3));
 
 		GroupRepository groupRepo = context.getBean(GroupRepository.class);
 		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", null, "1", List.of());
