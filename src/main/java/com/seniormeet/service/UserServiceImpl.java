@@ -1,8 +1,14 @@
 package com.seniormeet.service;
 
+import com.seniormeet.model.Group;
+import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
+import com.seniormeet.repository.GroupRepository;
+import com.seniormeet.repository.HobbyRepository;
 import com.seniormeet.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +18,13 @@ public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;
+    private GroupRepository groupRepository;
+    private HobbyRepository hobbyRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, GroupRepository groupRepository, HobbyRepository hobbyRepository) {
         this.userRepository = userRepository;
+        this.groupRepository = groupRepository;
+        this.hobbyRepository = hobbyRepository;
     }
 
     @Override
@@ -58,4 +68,36 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+
+    @Transactional
+    public void addUserToGroup(Long userId, Long groupId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new EntityNotFoundException("Group not found"));
+        user.getGroups().add(group);
+        group.getUsers().add(user);
+        userRepository.save(user);
+        groupRepository.save(group);
+    }
+
+    public List<Group> getUserGroups(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return user.getGroups();
+    }
+
+    public List<Hobby> getUserHobbies(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return user.getHobbies();
+    }
+
+    @Transactional
+    public void addHobbyToUser(Long userId, Long hobbyId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Hobby hobby = hobbyRepository.findById(hobbyId).orElseThrow(() -> new EntityNotFoundException("Hobby not found"));
+        user.getHobbies().add(hobby);
+        hobby.getUsers().add(user);
+        userRepository.save(user);
+        hobbyRepository.save(hobby);
+    }
+
 }
