@@ -25,6 +25,9 @@ public class User {
     private String password;
     private String phone;
 
+    @Column(nullable = true)
+    private byte[] photo;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -54,4 +57,6 @@ public class User {
     @ToString.Exclude
     private List<Post> posts = new ArrayList<>();
 
+    public User(String john, String doe, String mail, String secretpassword, String s, Object o, UserRole userRole) {
+    }
 }

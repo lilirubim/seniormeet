@@ -9,7 +9,9 @@ import com.seniormeet.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,10 +40,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+
     @Override
-    public User createUser(User user) {
+    public User createUser(User user, MultipartFile file) throws IOException {
+        System.out.println("Bytes1: "+ file.getBytes());
+        user.setPhoto(file.getBytes());
+        System.out.println("Bytes2: "+ file.getBytes());
         return userRepository.save(user);
     }
+
 
     @Override
     public User updateUser(Long id, User user) {
@@ -98,6 +105,16 @@ public class UserServiceImpl implements UserService {
         hobby.getUsers().add(user);
         userRepository.save(user);
         hobbyRepository.save(hobby);
+    }
+
+    @Override
+    public User savePhoto(MultipartFile file) throws IOException {
+        System.out.println(file.getName());
+        User newUser = new User("John333", "Doe333", "john.doe@example.com", "secretpassword", "+1234567890", null, null);
+        newUser.setPhoto(file.getBytes());
+        System.out.println("Bytes2: "+ file.getBytes());
+        return userRepository.save(newUser);
+//        return false;
     }
 
 }

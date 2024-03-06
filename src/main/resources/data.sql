@@ -1,15 +1,15 @@
 #sm_user
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user1@example.com', 'John', 'Doe', 'pass123', '1234567890', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user2@example.com', 'Jane', 'Smith', 'pass456', '9876543210', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('admin1@example.com', 'Admin', 'One', 'adminpass1', '1112223333', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('admin2@example.com', 'Admin', 'Two', 'adminpass2', '4445556666', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user3@example.com', 'Alice', 'Johnson', 'pass789', '2223334444', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user4@example.com', 'Bob', 'Brown', 'passabc', '5556667777', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user5@example.com', 'Eve', 'Wilson', 'passefg', '8889990000', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user6@example.com', 'Charlie', 'Davis', 'passhij', '1231231234', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user7@example.com', 'Grace', 'Martinez', 'passklm', '4564564567', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user8@example.com', 'Frank', 'Garcia', 'passnop', '7897897890', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, role) VALUES ('user10@example.com', 'Tony', 'Graciano', 'passnop', '3897897890', 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user1@example.com', 'John', 'Doe', 'pass123', '1234567890', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user2@example.com', 'Jane', 'Smith', 'pass456', '9876543210', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('admin1@example.com', 'Admin', 'One', 'adminpass1', '1112223333', null, 'ADMIN');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('admin2@example.com', 'Admin', 'Two', 'adminpass2', '4445556666', null, 'ADMIN');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user3@example.com', 'Alice', 'Johnson', 'pass789', '2223334444', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user4@example.com', 'Bob', 'Brown', 'passabc', '5556667777', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user5@example.com', 'Eve', 'Wilson', 'passefg', '8889990000', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user6@example.com', 'Charlie', 'Davis', 'passhij', '1231231234', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user7@example.com', 'Grace', 'Martinez', 'passklm', '4564564567', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user8@example.com', 'Frank', 'Garcia', 'passnop', '7897897890', null, 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user10@example.com', 'Tony', 'Graciano', 'passnop', '3897897890', null, 'USER');
 #sm_group
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Group for hiking enthusiasts', 'hiking.jpg', 'Respect nature and leave no trace behind', 'Hiking Group');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Photography lovers community', 'photography.jpg', 'Share your best shots and tips', 'Photography Club');
