@@ -67,14 +67,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
-        User u = userService.savePhoto(file);
-        if (u!=null)
-            return ResponseEntity.ok("Foto subida correctamente");
-        else
-            return ResponseEntity.status(500).body("Error al guardar la imagen");
-    }
+//    @PostMapping("/upload")
+//    public ResponseEntity<String> uploadPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
+//        User u = userService.savePhoto(file);
+//        if (u!=null)
+//            return ResponseEntity.ok("Foto subida correctamente");
+//        else
+//            return ResponseEntity.status(500).body("Error al guardar la imagen");
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {

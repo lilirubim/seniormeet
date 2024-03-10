@@ -31,5 +31,5 @@ public interface UserService {
     void addHobbyToUser(Long userId, Long hobbtId);
 
 
-    User savePhoto(MultipartFile file) throws IOException;
+    //User savePhoto(MultipartFile file) throws IOException;
 }

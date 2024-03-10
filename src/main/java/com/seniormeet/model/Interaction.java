@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,12 +35,13 @@ public class Interaction {
     private String comment;
     private LocalDateTime commentDate;
 
-    @ManyToMany(mappedBy = "interactions")
+    @ManyToMany(mappedBy = "interactions", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("interactions")
-    private List<Post> posts;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     @ToString.Exclude
+    private List<Post> posts = new ArrayList<>();;
+
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("interactions")
+    //@JsonManagedReference
     private User user;
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,21 +26,22 @@ public class Post {
 
     private String videoUrl; //video de youtube
 
-    @OneToOne
-    private Group group;
+    //@OneToOne
+    //private Group group;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("posts")
+    //@JsonManagedReference
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sm_post_interactions",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "interaction_id")
     )
     @JsonIgnoreProperties("posts")
     @ToString.Exclude
-    List<Interaction> interactions;
+    List<Interaction> interactions = new ArrayList<>();;
 
     //@OneToMany
     //List<Comment> comments;

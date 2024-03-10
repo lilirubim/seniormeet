@@ -107,14 +107,14 @@ public class UserServiceImpl implements UserService {
         hobbyRepository.save(hobby);
     }
 
-    @Override
-    public User savePhoto(MultipartFile file) throws IOException {
-        System.out.println(file.getName());
-        User newUser = new User("John333", "Doe333", "john.doe@example.com", "secretpassword", "+1234567890", null, null);
-        newUser.setPhoto(file.getBytes());
-        System.out.println("Bytes2: "+ file.getBytes());
-        return userRepository.save(newUser);
-//        return false;
-    }
+//    @Override
+//    public User savePhoto(MultipartFile file) throws IOException {
+//        System.out.println(file.getName());
+//        User newUser = new User("John333", "Doe333", "john.doe@example.com", "secretpassword", "+1234567890", null, null);
+//        newUser.setPhoto(file.getBytes());
+//        System.out.println("Bytes2: "+ file.getBytes());
+//        return userRepository.save(newUser);
+////        return false;
+//    }
 
 }

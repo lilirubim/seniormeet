@@ -18,6 +18,6 @@ public class Comment {
 
     String content;
 
-    @OneToOne
+    @ManyToOne
     User user;
 }

@@ -45,6 +45,7 @@ INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Thought-provoking q
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Friday!', null, null);
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Halloween!', null, null);
 -- sm_interaction
+INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, saved_date, shared_date, user_id, comment) VALUES (1, 1, 1, '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000', 1, 'Genial!');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, saved_date, shared_date, user_id, comment) VALUES (0, 1, 0, '2022-01-02 12:00:00.000000', null, '2022-01-04 12:00:00.000000', null, 2, 'Interesting content');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, saved_date, shared_date, user_id, comment) VALUES (1, 1, 1, '2022-01-03 12:00:00.000000', '2022-01-04 12:00:00.000000', '2022-01-05 12:00:00.000000', '2022-01-06 12:00:00.000000', 3, 'Love it!');
 INSERT INTO sm_interaction (liked, saved, shared, comment_date, liked_date, saved_date, shared_date, user_id, comment) VALUES (1, 0, 0, '2022-01-04 12:00:00.000000', '2022-01-06 12:00:00.000000', null, null, 4, 'Amazing post');
@@ -88,28 +89,6 @@ INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (2, 7);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (3, 8);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (4, 9);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (5, 10);
---
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (1, 1);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (2, 2);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (3, 3);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (4, 4);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (5, 5);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (6, 6);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (7, 7);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (8, 8);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (9, 9);
-INSERT INTO sm_user_interactions (interactions_id, user_id) VALUES (10, 10);
---
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (1, 1);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (2, 2);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (3, 3);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (4, 4);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (5, 5);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (6, 6);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (7, 7);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (8, 8);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (9, 9);
-INSERT INTO sm_user_posts (posts_id, user_id) VALUES (10, 10);
 --
 INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (1, 1);
 INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (2, 2);
