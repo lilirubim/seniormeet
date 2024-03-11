@@ -49,12 +49,12 @@ public class User {
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
-    @OneToMany //(mappedBy = "user",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "users") //(mappedBy = "user",fetch = FetchType.LAZY)
     @ToString.Exclude
-    //@JsonBackReference
+    @JsonIgnoreProperties("users")
     private List<Interaction> interactions = new ArrayList<>();
 
-    @OneToMany //(mappedBy = "user" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user") //(mappedBy = "user" , fetch = FetchType.LAZY)
     @ToString.Exclude
     //@JsonBackReference
     private List<Post> posts = new ArrayList<>();

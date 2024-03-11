@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +24,11 @@ public class Interaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+   /* @Enumerated(EnumType.STRING)
+    InteractionType type;
+    */
+
+
     private Boolean liked;
     private LocalDateTime likedDate;
 
@@ -32,25 +38,28 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
-
-
-    @ManyToMany(mappedBy = "interactions", fetch = FetchType.LAZY)
+    @ManyToMany
     @JsonIgnoreProperties("interactions")
     @ToString.Exclude
-    private List<Post> posts = new ArrayList<>();;
+    /*@JoinTable(
+            name = "sm_user_interactions",
+            joinColumns = @JoinColumn(name = "interaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
 
-    @ManyToOne//(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("interactions")
-    //@JsonManagedReference
-    private User user;
+     */
+    private List<User> users = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "interactions")
     @JsonIgnoreProperties("interactions")
-    @ManyToMany
-    @JoinTable(
+    @ToString.Exclude
+    /*@JoinTable(
             name = "sm_post_interactions",
             joinColumns = @JoinColumn(name = "interaction_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
-    private List<Post> posts;
+
+     */
+    private List<Post> posts = new ArrayList<>();
 
 }
