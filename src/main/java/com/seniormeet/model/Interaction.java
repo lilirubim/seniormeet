@@ -39,7 +39,7 @@ public class Interaction {
     @JsonIgnoreProperties("interactions")
     @ManyToMany
     @JoinTable(
-            name = "Post_Interaction",
+            name = "sm_post_interactions",
             joinColumns = @JoinColumn(name = "interaction_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
