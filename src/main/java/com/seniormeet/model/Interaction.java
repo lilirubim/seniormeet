@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Entity
@@ -32,8 +32,7 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
-    private String comment;
-    private LocalDateTime commentDate;
+
 
     @ManyToMany(mappedBy = "interactions", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("interactions")
@@ -44,4 +43,14 @@ public class Interaction {
     @JsonIgnoreProperties("interactions")
     //@JsonManagedReference
     private User user;
+
+    @JsonIgnoreProperties("interactions")
+    @ManyToMany
+    @JoinTable(
+            name = "sm_post_interactions",
+            joinColumns = @JoinColumn(name = "interaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private List<Post> posts;
+
 }
