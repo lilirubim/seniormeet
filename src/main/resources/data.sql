@@ -89,14 +89,3 @@ INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (2, 7);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (3, 8);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (4, 9);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (5, 10);
---
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (1, 1);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (2, 2);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (3, 3);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (4, 4);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (5, 5);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (6, 6);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (7, 7);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (8, 8);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (9, 9);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (10, 10);
