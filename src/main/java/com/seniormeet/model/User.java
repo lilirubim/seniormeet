@@ -49,9 +49,9 @@ public class User {
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
-    @OneToMany //(mappedBy = "user",fetch = FetchType.LAZY)
+    @ManyToMany //(mappedBy = "user",fetch = FetchType.LAZY)
     @ToString.Exclude
-    //@JsonBackReference
+    @JsonIgnoreProperties("users")
     private List<Interaction> interactions = new ArrayList<>();
 
     @OneToMany //(mappedBy = "user" , fetch = FetchType.LAZY)
