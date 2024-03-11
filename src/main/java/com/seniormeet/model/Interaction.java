@@ -32,8 +32,16 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+
+
+    @ManyToMany(mappedBy = "interactions", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("interactions")
+    @ToString.Exclude
+    private List<Post> posts = new ArrayList<>();;
+
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("interactions")
+    //@JsonManagedReference
     private User user;
 
     @JsonIgnoreProperties("interactions")

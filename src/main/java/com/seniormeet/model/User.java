@@ -25,10 +25,13 @@ public class User {
     private String password;
     private String phone;
 
+    @Column(nullable = true)
+    private byte[] photo;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sm_user_groups",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
@@ -37,7 +40,7 @@ public class User {
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sm_user_hobbies",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
@@ -46,12 +49,14 @@ public class User {
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany //(mappedBy = "user",fetch = FetchType.LAZY)
     @ToString.Exclude
+    //@JsonBackReference
     private List<Interaction> interactions = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany //(mappedBy = "user" , fetch = FetchType.LAZY)
     @ToString.Exclude
+    //@JsonBackReference
     private List<Post> posts = new ArrayList<>();
 
 }

@@ -7,9 +7,12 @@ import com.seniormeet.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -59,10 +62,19 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user, @RequestParam("photo") MultipartFile file) throws IOException {
+        User createdUser = userService.createUser(user, file);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
+
+//    @PostMapping("/upload")
+//    public ResponseEntity<String> uploadPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
+//        User u = userService.savePhoto(file);
+//        if (u!=null)
+//            return ResponseEntity.ok("Foto subida correctamente");
+//        else
+//            return ResponseEntity.status(500).body("Error al guardar la imagen");
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
