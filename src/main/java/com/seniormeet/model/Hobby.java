@@ -20,8 +20,8 @@ public class Hobby {
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "hobbies")
-    @JsonIgnoreProperties("hobbies, groups")
+    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("hobbies")
     @ToString.Exclude
     private List<User> users = new ArrayList<>();
 }
