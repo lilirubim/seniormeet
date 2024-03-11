@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,15 +32,17 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
-    private String comment;
-    private LocalDateTime commentDate;
-
-    @ManyToMany(mappedBy = "interactions")
-    @JsonIgnoreProperties("interactions")
-    private List<Post> posts;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @ToString.Exclude
     private User user;
+
+    @JsonIgnoreProperties("interactions")
+    @ManyToMany
+    @JoinTable(
+            name = "sm_post_interactions",
+            joinColumns = @JoinColumn(name = "interaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private List<Post> posts;
+
 }
