@@ -37,20 +37,14 @@ public class Interaction {
     @JsonIgnoreProperties("interactions")
     @ToString.Exclude
     @JoinTable(
-            name = "sm_user_interactions",
-            joinColumns = @JoinColumn(name = "interaction_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> user;
-
-    @ManyToMany
-    @JsonIgnoreProperties("interactions")
-    @ToString.Exclude
-    @JoinTable(
             name = "sm_post_interactions",
             joinColumns = @JoinColumn(name = "interaction_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
     private List<Post> posts = new ArrayList<>();
+
+
+    @ManyToOne
+    private User user;
 
 }

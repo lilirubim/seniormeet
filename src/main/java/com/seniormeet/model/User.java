@@ -31,7 +31,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @ManyToMany
     @JoinTable(name = "sm_user_groups",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
@@ -40,7 +41,8 @@ public class User {
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @ManyToMany
     @JoinTable(name = "sm_user_hobbies",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
@@ -48,15 +50,5 @@ public class User {
     @JsonIgnoreProperties("users")
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
-
-    @ManyToMany //(mappedBy = "user",fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @JsonIgnoreProperties("users")
-    private List<Interaction> interactions = new ArrayList<>();
-
-    @OneToMany //(mappedBy = "user" , fetch = FetchType.LAZY)
-    @ToString.Exclude
-    //@JsonBackReference
-    private List<Post> posts = new ArrayList<>();
 
 }
