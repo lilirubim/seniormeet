@@ -24,42 +24,31 @@ public class Interaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   /* @Enumerated(EnumType.STRING)
-    InteractionType type;
-    */
+   @Enumerated(EnumType.STRING)
+    private InteractionType type;
 
+    private LocalDateTime date;
 
-    private Boolean liked;
-    private LocalDateTime likedDate;
-
-    private Boolean shared;
-    private LocalDateTime sharedDate;
-
-    private Boolean saved;
-    private LocalDateTime savedDate;
-
-    @ManyToMany
-    @JsonIgnoreProperties("interactions")
+    @ManyToOne
     @ToString.Exclude
-    /*@JoinTable(
-            name = "sm_user_interactions",
-            joinColumns = @JoinColumn(name = "interaction_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinColumn(name = "user_id")
+    private User user;
 
-     */
-    private List<User> users = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "interactions")
-    @JsonIgnoreProperties("interactions")
+    @ManyToOne
     @ToString.Exclude
-    /*@JoinTable(
-            name = "sm_post_interactions",
-            joinColumns = @JoinColumn(name = "interaction_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id")
-    )
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-     */
-    private List<Post> posts = new ArrayList<>();
+//    @ManyToMany(mappedBy = "interactions")
+//    @JsonIgnoreProperties("interactions")
+//    @ToString.Exclude
+//    /*@JoinTable(
+//            name = "sm_post_interactions",
+//            joinColumns = @JoinColumn(name = "interaction_id"),
+//            inverseJoinColumns = @JoinColumn(name = "post_id")
+//    )
+//
+//     */
+//    private List<Post> posts = new ArrayList<>();
 
 }

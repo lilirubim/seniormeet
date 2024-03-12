@@ -40,12 +40,8 @@ public class InteractionServiceImpl implements InteractionService{
         Optional<Interaction> interactionOptional = interactionRepository.findById(id);
         if (interactionOptional.isPresent()) {
             Interaction existingInteraction = interactionOptional.get();
-            existingInteraction.setLiked(interaction.getLiked());
-            existingInteraction.setLikedDate(interaction.getLikedDate());
-            existingInteraction.setShared(interaction.getShared());
-            existingInteraction.setSharedDate(interaction.getSharedDate());
-            existingInteraction.setSaved(interaction.getSaved());
-            existingInteraction.setSavedDate(interaction.getSavedDate());
+            existingInteraction.setType(interaction.getType());
+            existingInteraction.setDate(interaction.getDate());
 
 
             // Actualizar otras propiedades según sea necesario
