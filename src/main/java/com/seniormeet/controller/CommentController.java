@@ -2,12 +2,15 @@ package com.seniormeet.controller;
 
 import com.seniormeet.model.Comment;
 import com.seniormeet.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
+@Slf4j
 @RestController
 @RequestMapping("/comment")
 public class CommentController {

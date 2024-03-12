@@ -51,4 +51,5 @@ public class User {
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
+
 }

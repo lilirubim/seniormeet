@@ -16,7 +16,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 @Slf4j
 @RequestMapping("/groups")
 public class GroupController {
@@ -28,6 +28,7 @@ public class GroupController {
     @GetMapping
     public ResponseEntity<List<Group>> findAll() {
         List<Group> groups = groupService.findGroup();
+        log.info("REST request to findAll groups");
         return ResponseEntity.ok(groups);
     }
 

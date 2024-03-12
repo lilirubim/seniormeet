@@ -29,19 +29,23 @@ public class Post {
     //@OneToOne
     //private Group group;
 
+    // si se pone lazy entonces hay que hacer un JPQL
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("posts")
     //@JsonManagedReference
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    // terminadas en many ya son lazy por defecto no hace falta ponerlo
+    @ManyToMany()
     @JoinTable(name = "sm_post_interactions",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "interaction_id")
     )
+
+
     @JsonIgnoreProperties("posts")
     @ToString.Exclude
-    List<Interaction> interactions = new ArrayList<>();;
+    List<Interaction> interactions = new ArrayList<>();
 
     //@OneToMany
     //List<Comment> comments;

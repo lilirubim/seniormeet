@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-
 
 
 @Entity
@@ -24,6 +22,9 @@ public class Interaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    InteractionType type;
+
     private Boolean liked;
     private LocalDateTime likedDate;
 
@@ -33,6 +34,12 @@ public class Interaction {
     private Boolean saved;
     private LocalDateTime savedDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private User user;
+
+
     @ManyToMany
     @JsonIgnoreProperties("interactions")
     @ToString.Exclude
@@ -41,10 +48,5 @@ public class Interaction {
             joinColumns = @JoinColumn(name = "interaction_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
-    private List<Post> posts = new ArrayList<>();
-
-
-    @ManyToOne
-    private User user;
-
+    private List<Post> posts;
 }

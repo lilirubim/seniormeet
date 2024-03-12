@@ -22,16 +22,16 @@ INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Travelers a
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Music lovers jamming group', 'music.jpg', 'Discuss your favorite music genres and bands', 'Music Lovers Jamming');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Environmental sustainability advocates', 'sustainability.jpg', 'Promote eco-friendly practices and sustainable living', 'Sustainability Advocates');
 -- sm_hobby
-INSERT INTO sm_hobby (description, name) VALUES ('Playing musical instruments', 'Music');
-INSERT INTO sm_hobby (description, name) VALUES ('Capturing beautiful moments through photography', 'Photography');
-INSERT INTO sm_hobby (description, name) VALUES ('Exploring new hiking trails and nature', 'Hiking');
-INSERT INTO sm_hobby (description, name) VALUES ('Creating art and expressing creativity through painting', 'Art');
-INSERT INTO sm_hobby (description, name) VALUES ('Reading and discussing books of various genres', 'Reading');
-INSERT INTO sm_hobby (description, name) VALUES ('Cooking and experimenting with different recipes', 'Cooking');
-INSERT INTO sm_hobby (description, name) VALUES ('Staying fit and active through various workout routines', 'Fitness');
-INSERT INTO sm_hobby (description, name) VALUES ('Traveling to new destinations and experiencing different cultures', 'Travel');
-INSERT INTO sm_hobby (description, name) VALUES ('Advocating for environmental sustainability and eco-friendly practices', 'Sustainability');
-INSERT INTO sm_hobby (description, name) VALUES ('Exploring and learning about new technologies and coding', 'Tech');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Playing musical instruments', 'Music', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Capturing beautiful moments through photography', 'Photography', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring new hiking trails and nature', 'Hiking', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Creating art and expressing creativity through painting', 'Art', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Reading and discussing books of various genres', 'Reading', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Cooking and experimenting with different recipes', 'Cooking', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Staying fit and active through various workout routines', 'Fitness', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Traveling to new destinations and experiencing different cultures', 'Travel', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Advocating for environmental sustainability and eco-friendly practices', 'Sustainability', 'https://picsum.photos/id/944/900/500');
+INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring and learning about new technologies and coding', 'Tech', 'https://picsum.photos/id/944/900/500');
 -- sm_post
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Great content', 'https://example.com/photo1.jpg', null);
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Interesting article', null, null);
@@ -89,14 +89,3 @@ INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (2, 7);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (3, 8);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (4, 9);
 INSERT INTO sm_user_hobbies (hobby_id, user_id) VALUES (5, 10);
---
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (1, 1);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (2, 2);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (3, 3);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (4, 4);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (5, 5);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (6, 6);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (7, 7);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (8, 8);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (9, 9);
-INSERT INTO sm_post_interactions (interaction_id, post_id) VALUES (10, 10);

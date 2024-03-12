@@ -19,6 +19,9 @@ public class Hobby {
     private Long id;
     private String name;
     private String description;
+    // añadir foto
+    @Column(name = "photo_url")
+    private String photoUrl;
 
     @ManyToMany(mappedBy = "hobbies", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("hobbies")

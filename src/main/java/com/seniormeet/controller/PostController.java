@@ -2,6 +2,7 @@ package com.seniormeet.controller;
 
 import com.seniormeet.model.Post;
 import com.seniormeet.service.PostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/post")
+@CrossOrigin("*")
+@Slf4j
 public class PostController {
 
     private final PostService postService;
