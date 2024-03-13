@@ -36,16 +36,16 @@ public class Post {
     private User user;
 
     // terminadas en many ya son lazy por defecto no hace falta ponerlo
-    @ManyToMany()
-    @JoinTable(name = "sm_post_interactions",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "interaction_id")
-    )
+//    @ManyToMany()
+//    @JoinTable(name = "sm_post_interactions",
+//            joinColumns = @JoinColumn(name = "post_id"),
+//            inverseJoinColumns = @JoinColumn(name = "interaction_id")
+//    )
 
 
-    @JsonIgnoreProperties("posts")
-    @ToString.Exclude
-    List<Interaction> interactions = new ArrayList<>();
+//    @JsonIgnoreProperties("posts")
+//    @ToString.Exclude
+//    List<Interaction> interactions = new ArrayList<>();
 
     //@OneToMany
     //List<Comment> comments;
