@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +25,13 @@ public class User {
     private String email;
     private String password;
     private String phone;
-
-    @Column(nullable = true)
+    private String codigoPostal;
+    private String ciudad;
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+    private LocalDate fechaNacimiento;
     private byte[] photo;
-
+    private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -56,9 +60,9 @@ public class User {
 //    @JsonIgnoreProperties("users")
 //    private List<Interaction> interactions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user") //(mappedBy = "user" , fetch = FetchType.LAZY)
-    @ToString.Exclude
-    //@JsonBackReference
-    private List<Post> posts = new ArrayList<>();
+//    @OneToMany(mappedBy = "user") //(mappedBy = "user" , fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    //@JsonBackReference
+//    private List<Post> posts = new ArrayList<>();
 
 }
