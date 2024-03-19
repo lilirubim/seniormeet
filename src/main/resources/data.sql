@@ -22,16 +22,17 @@ INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Travelers a
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Music lovers jamming group', 'music.jpg', 'Discuss your favorite music genres and bands', 'Music Lovers Jamming');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Environmental sustainability advocates', 'sustainability.jpg', 'Promote eco-friendly practices and sustainable living', 'Sustainability Advocates');
 -- sm_hobby
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Playing musical instruments', 'Music', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Capturing beautiful moments through photography', 'Photography', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring new hiking trails and nature', 'Hiking', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Creating art and expressing creativity through painting', 'Art', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Reading and discussing books of various genres', 'Reading', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Cooking and experimenting with different recipes', 'Cooking', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Staying fit and active through various workout routines', 'Fitness', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Traveling to new destinations and experiencing different cultures', 'Travel', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Advocating for environmental sustainability and eco-friendly practices', 'Sustainability', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring and learning about new technologies and coding', 'Tech', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Escuchar música, cantar o aprender a tocar un instrumento. La música es el lenguaje del alma', 'Música', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Tomar fotos de la familia, paisajes o momentos especiales.', 'Fotografía', 'foto.jpg');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Salir a caminar por tu lugar favorito. Mantenerse activo y disfrutar del aire fresco es vital', 'Caminatas', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Expresar sentimientos y creatividad a través de colores y formas. Darle vida a tus ideas. Todos podemos ser artistas', 'Pintura y Dibujo', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Perderse en las páginas de un buen libro o revista. a lectura es una ventana a nuevos mundos, historias y conocimientos.', 'Lectura', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Preparar esos platos o dulces que tanto te gustan. Cocinar es un arte que alimenta tanto el cuerpo como el alma.', 'Cocina', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Disfrutar de un café mientras se charla con amigos. Es una buena forma de compartir historias, risas y buenos momentos', 'Ratitos de Café y Charla', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Viajar a nuevos destinos y descubrir diferentes culturas', 'Viajar', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Aprender y disfrutar utilizando de las nuevas tecnologías', 'Tecnología', 'https://picsum.photos/id/944/900/500');
+-- INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Escribir historias, poemas o llevar un diario personal. La escritura es una excelente manera de expresar pensamientos y sentimientos, y puede ser una actividad muy gratificante.', 'Escribir', 'https://picsum.photos/id/944/900/500');
+INSERT INTO `sm_hobby` (`id`, `description`, `name`, `photo_url`) VALUES (1,'Escuchar música, cantar o aprender a tocar un instrumento. La música es el lenguaje del alma','Música','musica.jpg'),(2,'Tomar fotos de la familia, paisajes o momentos especiales.','Fotografía','foto.jpg'),(3,'Salir a caminar por tu lugar favorito. Mantenerse activo y disfrutar del aire fresco es vital','Caminatas','caminata.jpg'),(4,'Expresar sentimientos y creatividad a través de colores y formas. Darle vida a tus ideas. Todos podemos ser artistas','Pintura y Dibujo','pintura.jpg'),(5,'Perderse en las páginas de un buen libro o revista. a lectura es una ventana a nuevos mundos, historias y conocimientos.','Lectura','leyendo.jpg'),(6,'Preparar esos platos o dulces que tanto te gustan. Cocinar es un arte que alimenta tanto el cuerpo como el alma.','Cocina','cocinando_hombre.jpg'),(7,'Disfrutar de un café mientras se charla con amigos. Es una buena forma de compartir historias, risas y buenos momentos','Ratitos de Café y Charla','mayores_tomando_cafe.jpg'),(8,'Viajar a nuevos destinos y descubrir diferentes culturas','Viajar','viajar.jpg'),(9,'Aprender y disfrutar utilizando de las nuevas tecnologías','Tecnología','tecnologia.jpg'),(10,'Escribir historias, poemas o llevar un diario personal. La escritura es una excelente manera de expresar pensamientos y sentimientos, y puede ser una actividad muy gratificante.','Escribir','escribiendo.jpg');
 -- sm_post
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Great content', 'https://example.com/photo1.jpg', null);
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Interesting article', null, null);
@@ -45,17 +46,17 @@ INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Thought-provoking q
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Friday!', null, null);
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Happy Halloween!', null, null);
 -- sm_interaction
-INSERT INTO sm_interaction (liked, saved, shared, liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 0,  null, '2022-01-04 12:00:00.000000', null);
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-04 12:00:00.000000', '2022-01-05 12:00:00.000000', '2022-01-06 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 0, 0,  '2022-01-06 12:00:00.000000', null, null);
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 1,  null, '2022-01-07 12:00:00.000000', '2022-01-08 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 0,  '2022-01-07 12:00:00.000000', '2022-01-09 12:00:00.000000', null);
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 0, 1,  null, null, '2022-01-10 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-10 12:00:00.000000', '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 0,  null, '2022-01-13 12:00:00.000000', null);
-INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-12 12:00:00.000000', '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000');
-INSERT INTO sm_interaction (liked, saved, shared,liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-02 12:00:00.000000', '2022-01-03 12:00:00.000000', '2022-01-04 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared, liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000', '2022-01-01 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 0,  null, '2022-01-04 12:00:00.000000', null);
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-04 12:00:00.000000', '2022-01-05 12:00:00.000000', '2022-01-06 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 0, 0,  '2022-01-06 12:00:00.000000', null, null);
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 1,  null, '2022-01-07 12:00:00.000000', '2022-01-08 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 0,  '2022-01-07 12:00:00.000000', '2022-01-09 12:00:00.000000', null);
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 0, 1,  null, null, '2022-01-10 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 1, 1,  '2022-01-10 12:00:00.000000', '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (0, 1, 0,  null, '2022-01-13 12:00:00.000000', null);
+-- INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-12 12:00:00.000000', '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000');
+-- INSERT INTO sm_interaction (liked, saved, shared,liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-02 12:00:00.000000', '2022-01-03 12:00:00.000000', '2022-01-04 12:00:00.000000');
 -- sm_comment
 INSERT INTO sm_comment (user_id, content) VALUES (1, "Great post!");
 INSERT INTO sm_comment (user_id, content) VALUES (2, "Thanks for sharing!");
