@@ -41,11 +41,18 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
+    @Override
+    public User createUser(User user) throws IOException {
+        return userRepository.save(user);
+    }
+
+
     @Override
     public User createUser(User user, MultipartFile file) throws IOException {
-        System.out.println("Bytes1: "+ file.getBytes());
-        user.setPhoto(file.getBytes());
-        System.out.println("Bytes2: "+ file.getBytes());
+//        System.out.println("Bytes1: "+ file.getBytes());
+//        user.setPhoto(file.getBytes());
+//        System.out.println("Bytes2: "+ file.getBytes());
         return userRepository.save(user);
     }
 

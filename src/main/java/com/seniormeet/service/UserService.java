@@ -18,6 +18,8 @@ public interface UserService {
 
     User createUser(User user, MultipartFile file) throws IOException;
 
+    User createUser(User user) throws IOException;
+
     User updateUser(Long id, User user);
 
     boolean deleteUser(Long id);
