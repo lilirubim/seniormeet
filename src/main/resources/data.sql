@@ -11,16 +11,15 @@ INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role)
 INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user8@example.com', 'Frank', 'Garcia', 'passnop', '7897897890', null, 'USER');
 INSERT INTO sm_user (email, first_name, last_name, password, phone, photo, role) VALUES ('user10@example.com', 'Tony', 'Graciano', 'passnop', '3897897890', null, 'USER');
 -- sm_group
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Group for hiking enthusiasts', 'hiking.jpg', 'Respect nature and leave no trace behind', 'Hiking Group');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Photography lovers community', 'photography.jpg', 'Share your best shots and tips', 'Photography Club');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Healthy cooking and nutrition group', 'cooking.jpg', 'Promote healthy eating and share recipes', 'Nutrition Club');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Bookworms reading club', 'books.jpg', 'Discuss your favorite books and authors', 'Bookworms Club');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Tech and coding enthusiasts network', 'coding.jpg', 'Discuss the latest tech trends and coding challenges', 'Tech Enthusiasts Group');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Art and painting community', 'art.jpg', 'Share your artwork and painting techniques', 'Artists Network');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Fitness and workout motivation group', 'fitness.jpg', 'Share workout routines and motivate each other', 'Fitness Motivation Club');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Travelers and wanderlust explorers', 'travel.jpg', 'Share travel experiences and tips for exploring new destinations', 'Wanderlust Travelers');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Music lovers jamming group', 'music.jpg', 'Discuss your favorite music genres and bands', 'Music Lovers Jamming');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Environmental sustainability advocates', 'sustainability.jpg', 'Promote eco-friendly practices and sustainable living', 'Sustainability Advocates');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Entusiastas de los paseos', 'caminata.jpg', 'Respeto por la naturaleza', 'Caminatas');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Enamorados de la fotografía', 'foto.jpg', 'Comparte tus mejores fotos y trucos', 'Club de Fotografía');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Cocina saludable y nutrition', 'cocina.jpg', 'Promueve comer saludable y compartir recetas', 'Club de Cocina');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comedores libro', 'lectura.jpg', 'Debate sobre tus libros y autores favoritos', 'Club de lectura');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Grupo de baile', 'baile.jpg', 'Aprende a bailar topo tipo de música', 'Entusiastas Bailadores');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comunidad de arte y pintura', 'arte.jpg', 'Comparte tus obras de arte y técnicas de pintura ', 'Arte y Pintura');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Viajeros exploradores', 'viajeros.jpg', 'Comparte tus viajes y explora nuevos destinos', 'Pasión por Viajar');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Amantes de la música', 'musica.png', 'Hablamos de música, solistas y  bandas', 'Amantes de la música');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Huertos urbanos', 'huerto.jpg', 'Promueve los huertos sostenible', 'Huerto');
 -- sm_hobby
 INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Playing musical instruments', 'Music', 'https://picsum.photos/id/944/900/500');
 INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Capturing beautiful moments through photography', 'Photography', 'https://picsum.photos/id/944/900/500');
