@@ -3,6 +3,7 @@ package com.seniormeet.controller;
 import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
+import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final GroupService groupService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, GroupService groupService) {
         this.userService = userService;
+        this.groupService = groupService;
     }
 
     @GetMapping
@@ -94,5 +97,19 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+//esta parte la hizo ALAN no la borren.
+    @GetMapping("add-group/{id}")
+    public ResponseEntity<User> addGroupToUser(@PathVariable Long id) {
+        // TODO recuperar el usuario de base de datos gracias a la Security (lo hará Alan en clase)
+        User user = new User();
+        Group group = groupService.findById(id);
+        if(!user.getGroups().contains(group)) {
+            user.getGroups().add(group);
+            return ResponseEntity.ok(userService.updateUser(user.getId(), user));
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 }
