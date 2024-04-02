@@ -31,6 +31,7 @@ public class User {
     private Sexo sexo;
     private LocalDate fechaNacimiento;
     private String photo;
+    @Column(columnDefinition = "boolean")
     private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
