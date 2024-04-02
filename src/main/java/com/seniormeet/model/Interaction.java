@@ -1,11 +1,10 @@
 package com.seniormeet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Entity
@@ -22,24 +21,20 @@ public class Interaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean liked;
-    private LocalDateTime likedDate;
+   @Enumerated(EnumType.STRING)
+    private InteractionType type;
 
-    private Boolean shared;
-    private LocalDateTime sharedDate;
-
-    private Boolean saved;
-    private LocalDateTime savedDate;
-
-    private String comment;
-    private LocalDateTime commentDate;
-
-    @ManyToMany(mappedBy = "interactions")
-    @JsonIgnoreProperties("interactions")
-    private List<Post> posts;
+    private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     @ToString.Exclude
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+
 }

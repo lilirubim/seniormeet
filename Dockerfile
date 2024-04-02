@@ -1,3 +1,12 @@
+FROM maven:3.8.3-openjdk-17 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+#COPY . .
+RUN mvn -f /home/app/pom.xml clean package
+COPY target/backend-0.0.1-SNAPSHOT.jar backend-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/backend-0.0.1-SNAPSHOT.jar"]
+
 #FROM eclipse-temurin:21-jdk-jammy
 #WORKDIR /app
 #COPY .mvn/ .mvn
@@ -6,7 +15,6 @@
 #COPY src ./src
 #CMD ["./mvnw", "spring-boot:run"]
 #CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]
-
 
 #
 #
@@ -17,17 +25,16 @@
 #ENV MYSQL_DATABASE senior_mmet_db
 
 # Usa una imagen de Java como base
-FROM bjdelacruz/amazoncorretto-20.0.1-gradle-8.2.1
-#
-## Establece el directorio de trabajo en la imagen
-WORKDIR /app
-#
-COPY . /app
-#RUN ./mvnw clean package
-COPY target/seniormeet.jar app.jar
-
-###RUN mvn clean clean
-CMD ["java", "-jar", "target/app.jar"]
+#FROM bjdelacruz/amazoncorretto-20.0.1-gradle-8.2.1
+##
+### Establece el directorio de trabajo en la imagen
+#WORKDIR /app
+##
+#COPY . /app
+##RUN ./mvnw clean package
+#COPY target/seniormeet.jar app.jar
+####RUN mvn clean clean
+#CMD ["java", "-jar", "target/app.jar"]
 
 #FROM mysql:8.0
 #ENV MYSQL_ROOT_PASSWORD admin

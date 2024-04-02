@@ -1,16 +1,18 @@
 package com.seniormeet.controller;
 
 import com.seniormeet.model.Interaction;
-import com.seniormeet.repository.InteractionRepository;
 import com.seniormeet.service.InteractionService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/interaction")
 
 public class InteractionController {

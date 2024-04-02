@@ -3,12 +3,15 @@ package com.seniormeet.controller;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.service.HobbyService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @AllArgsConstructor
 @RestController
+@CrossOrigin("*")
+@Slf4j
 @RequestMapping("/hobbies")
 
 public class HobbyController {

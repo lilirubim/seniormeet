@@ -21,8 +21,9 @@ public class Group {
     private String description;
     private String rules;
     private String photoUrl;
-    @ManyToMany(mappedBy = "groups")
-    @JsonIgnoreProperties("groups, hobbies")
+
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("groups")
     @ToString.Exclude
     private List<User> users = new ArrayList<>();
 }

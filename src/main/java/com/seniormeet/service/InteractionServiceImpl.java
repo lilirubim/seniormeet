@@ -1,7 +1,6 @@
 package com.seniormeet.service;
 
 import com.seniormeet.model.Interaction;
-import com.seniormeet.model.User;
 import com.seniormeet.repository.InteractionRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,14 +40,9 @@ public class InteractionServiceImpl implements InteractionService{
         Optional<Interaction> interactionOptional = interactionRepository.findById(id);
         if (interactionOptional.isPresent()) {
             Interaction existingInteraction = interactionOptional.get();
-            existingInteraction.setLiked(interaction.getLiked());
-            existingInteraction.setLikedDate(interaction.getLikedDate());
-            existingInteraction.setShared(interaction.getShared());
-            existingInteraction.setSharedDate(interaction.getSharedDate());
-            existingInteraction.setSaved(interaction.getSaved());
-            existingInteraction.setSavedDate(interaction.getSavedDate());
-            existingInteraction.setComment(interaction.getComment());
-            existingInteraction.setCommentDate(interaction.getCommentDate());
+            existingInteraction.setType(interaction.getType());
+            existingInteraction.setDate(interaction.getDate());
+
 
             // Actualizar otras propiedades según sea necesario
             return interactionRepository.save(existingInteraction);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,16 @@ public class User {
     private String email;
     private String password;
     private String phone;
-
+    private String codigoPostal;
+    private String ciudad;
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+    private LocalDate fechaNacimiento;
+    private String photo;
+    private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
 
     @ManyToMany
     @JoinTable(name = "sm_user_groups",
@@ -37,6 +45,7 @@ public class User {
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
+
     @ManyToMany
     @JoinTable(name = "sm_user_hobbies",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -46,12 +55,14 @@ public class User {
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
-    @OneToMany
-    @ToString.Exclude
-    private List<Interaction> interactions = new ArrayList<>();
+//    @ManyToMany(mappedBy = "users") //(mappedBy = "user",fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    @JsonIgnoreProperties("users")
+//    private List<Interaction> interactions = new ArrayList<>();
 
-    @OneToMany
-    @ToString.Exclude
-    private List<Post> posts = new ArrayList<>();
+//    @OneToMany(mappedBy = "user") //(mappedBy = "user" , fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    //@JsonBackReference
+//    private List<Post> posts = new ArrayList<>();
 
 }
