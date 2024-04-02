@@ -3,6 +3,7 @@ package com.seniormeet.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.mapping.ToOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,8 @@ public class Post {
 
     private String videoUrl; //video de youtube
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @ManyToOne
