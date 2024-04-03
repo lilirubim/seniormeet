@@ -1,17 +1,25 @@
 package com.seniormeet.controller;
 
+import com.seniormeet.dto.Login;
+import com.seniormeet.dto.Register;
+import com.seniormeet.dto.Token;
 import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
+import com.seniormeet.repository.UserRepository;
 import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -20,10 +28,12 @@ public class UserController {
 
     private final UserService userService;
     private final GroupService groupService;
+    private final UserRepository userRepo;
 
-    public UserController(UserService userService, GroupService groupService) {
+    public UserController(UserService userService, GroupService groupService, UserRepository userRepo) {
         this.userService = userService;
         this.groupService = groupService;
+        this.userRepo = userRepo;
     }
 
     @GetMapping
@@ -111,5 +121,55 @@ public class UserController {
 
         return ResponseEntity.notFound().build();
 
+    }
+
+
+    @PostMapping("/register")
+    public void register(@RequestBody Register register) {
+        if (this.userRepo.existsByEmail(register.email())) {
+            throw new RuntimeException("Email ocupado");
+        }
+
+        User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, null, null, null);
+        this.userRepo.save(user);
+
+    }
+
+
+    @PostMapping("/login")
+    public Token login(@RequestBody Login login) {
+        if (!this.userRepo.existsByEmail(login.email())) {
+            throw new NoSuchElementException("Usuario no encontrado!");
+        }
+
+        User user = this.userRepo.findByEmail(login.email()).orElseThrow();
+
+        if (!user.getPassword().equals(login.password())) {
+            throw new RuntimeException("Las passwords no coinciden");
+        }
+
+//        String token = Jwts.builder()
+//                .signWith(Keys.hmacShaKeyFor("admin".getBytes()), SignatureAlgorithm.HS512)
+//                .setHeaderParam("typ", "JWT")
+//                .setSubject(String.valueOf(user.getId()))
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date(System.currentTimeMillis() + (3600 * 24 * 1000)))
+//                .claim("email", user.getEmail())
+//                .claim("role", "admin")
+//                .compact();
+
+        String token = Jwts.builder()
+                // id del usuario
+                .subject(String.valueOf(user.getId()))
+                // La clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend
+                .signWith(Keys.hmacShaKeyFor("admin1234admin1234admin1234admin1234admin1234admin1234".getBytes()))
+                // Fecha emisión del token
+                .issuedAt(new Date())
+                // información personalizada: rol, username, email...
+                .claim("role", "admin")
+                // Construye el token
+                .compact();
+
+        return new Token(token);
     }
 }
