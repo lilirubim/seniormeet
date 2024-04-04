@@ -6,7 +6,9 @@ import lombok.*;
 import org.hibernate.mapping.ToOne;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,9 +44,9 @@ public class Post {
     )
     @JsonIgnoreProperties("posts")
     @ToString.Exclude
-    List<Interaction> interactions = new ArrayList<>();
+    Set<Interaction> interactions = new HashSet<>();
 
     @OneToMany
-    List<Comment> comments = new ArrayList<>();
+    Set<Comment> comments = new HashSet<>();
 
 }
