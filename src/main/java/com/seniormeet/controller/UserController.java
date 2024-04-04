@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -158,18 +160,38 @@ public class UserController {
 //                .claim("role", "admin")
 //                .compact();
 
+//        String token = Jwts.builder()
+//                // id del usuario
+//                .subject(String.valueOf(user.getId()))
+//                // La clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend
+//                .signWith(Keys.hmacShaKeyFor("admin1234admin1234admin1234admin1234admin1234admin1234".getBytes()))
+//                // Fecha emisión del token
+//                .issuedAt(new Date())
+//                // información personalizada: rol, username, email...
+//                .claim("role", "admin")
+//                // Construye el token
+//                .compact();
+
+        Date issuedDate = new Date();
+        long nextWeekMillis = TimeUnit.DAYS.toMillis(7);
+        Date expirationDate = new Date(issuedDate.getTime() + nextWeekMillis);
+        byte[] key = Base64.getDecoder().decode("FZD5maIaX04mYCwsgckoBh1NJp6T3t62h2MVyEtdo3w=");
+
         String token = Jwts.builder()
                 // id del usuario
                 .subject(String.valueOf(user.getId()))
                 // La clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend
-                .signWith(Keys.hmacShaKeyFor("admin1234admin1234admin1234admin1234admin1234admin1234".getBytes()))
+                .signWith(Keys.hmacShaKeyFor(key))
                 // Fecha emisión del token
-                .issuedAt(new Date())
+                .issuedAt(issuedDate)
+                // Fecha de expiración del token
+                .expiration(expirationDate)
                 // información personalizada: rol, username, email...
                 .claim("role", "admin")
                 // Construye el token
                 .compact();
 
         return new Token(token);
+
     }
 }
