@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin("*")
 @Slf4j
@@ -23,8 +24,8 @@ public class CommentController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Comment>> findAll(){
-        List<Comment> comments = commentService.findComments();
+    public ResponseEntity<Set<Comment>> findAll(){
+        Set<Comment> comments = commentService.findComments();
         return ResponseEntity.ok(comments);
 
     }
