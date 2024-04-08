@@ -20,26 +20,26 @@ public class SeniormeetApplication {
 		ApplicationContext context = SpringApplication.run(SeniormeetApplication.class, args);
 
 
-		GroupRepository groupRepo = context.getBean(GroupRepository.class);
-		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", "caminata.jpg", null);
-		groupRepo.saveAll(List.of(group1));
+//		GroupRepository groupRepo = context.getBean(GroupRepository.class);
+//		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", "caminata.jpg", null);
+//		//groupRepo.saveAll(List.of(group1));
 
 
-		UserRepository userRepository = context.getBean(UserRepository.class);
-		User user1 = new User(
-				null,
-				"user1",
-				"user1",
-				"user1@gmail.com",
-				"password",
-				"777777",
-				"24011",
-				"Madrid",
-				Sexo.FEMENINO,
-				null,
-				null, true,
-				UserRole.USER, List.of(group1), null);
-		userRepository.saveAll(List.of(user1));
+//		UserRepository userRepository = context.getBean(UserRepository.class);
+//		User user1 = new User(
+//				null,
+//				"user1",
+//				"user1",
+//				"user1@gmail.com",
+//				"password",
+//				"777777",
+//				"24011",
+//				"Madrid",
+//				Sexo.FEMENINO,
+//				null,
+//				null, true,
+//				UserRole.USER, List.of(group1), null);
+//		userRepository.saveAll(List.of(user1));
 
 
 //
