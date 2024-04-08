@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -24,6 +25,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="user_id")
     User user;
+
+    private LocalDateTime date;
 
     @Override
     public final boolean equals(Object o) {

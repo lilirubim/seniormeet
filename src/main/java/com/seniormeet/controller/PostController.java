@@ -78,7 +78,7 @@ public class PostController {
        return ResponseEntity.ok(comments);
     }
 
-    @PostMapping("{postId}/add-interaction/{interactionId")
+    @PostMapping("{postId}/add-interaction/{interactionId}")
     public ResponseEntity<Boolean> addInteractionToPost(@PathVariable Long postId, @PathVariable Long interactionId){
         Post post = postService.findById(postId);
         Interaction interaction = interactionService.findById(interactionId);
