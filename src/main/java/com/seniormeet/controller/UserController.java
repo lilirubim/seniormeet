@@ -1,21 +1,41 @@
 package com.seniormeet.controller;
 
+import com.seniormeet.dto.Login;
+import com.seniormeet.dto.Register;
+import com.seniormeet.dto.Token;
+import com.seniormeet.model.Group;
+import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
+import com.seniormeet.repository.UserRepository;
+import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
+    private final GroupService groupService;
+    private final UserRepository userRepo;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, GroupService groupService, UserRepository userRepo) {
         this.userService = userService;
+        this.groupService = groupService;
+        this.userRepo = userRepo;
     }
 
     @GetMapping
@@ -32,11 +52,44 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/{userId}/groups")
+    public ResponseEntity<List<Group>> getUserGroups(@PathVariable Long userId) {
+        List<Group> groups = userService.getUserGroups(userId);
+        return ResponseEntity.ok(groups);
+    }
+
+    @GetMapping("/{userId}/hobbies")
+    public ResponseEntity<List<Hobby>> getUserHobbies(@PathVariable Long userId) {
+        List<Hobby> hobbies = userService.getUserHobbies(userId);
+        return ResponseEntity.ok(hobbies);
+    }
+
+    @PostMapping("/{userId}/groups/{groupId}")
+    public ResponseEntity<String> addUserToGroup(@PathVariable Long userId, @PathVariable Long groupId) {
+        userService.addUserToGroup(userId, groupId);
+        return ResponseEntity.ok("User added to group successfully");
+    }
+
+    @PostMapping("/{userId}/hobbies/{hobbyId}")
+    public ResponseEntity<String> addHobbyToUser(@PathVariable Long userId, @PathVariable Long hobbyId) {
+        userService.addHobbyToUser(userId, hobbyId);
+        return ResponseEntity.ok("Hobby added to user successfully");
+    }
+
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user, @RequestParam("photo") MultipartFile file) throws IOException {
+        User createdUser = userService.createUser(user, file);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
+
+//    @PostMapping("/upload")
+//    public ResponseEntity<String> uploadPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
+//        User u = userService.savePhoto(file);
+//        if (u!=null)
+//            return ResponseEntity.ok("Foto subida correctamente");
+//        else
+//            return ResponseEntity.status(500).body("Error al guardar la imagen");
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -56,5 +109,89 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+//esta parte la hizo ALAN no la borren.
+    @GetMapping("add-group/{id}")
+    public ResponseEntity<User> addGroupToUser(@PathVariable Long id) {
+        // TODO recuperar el usuario de base de datos gracias a la Security (lo hará Alan en clase)
+        User user = new User();
+        Group group = groupService.findById(id);
+        if(!user.getGroups().contains(group)) {
+            user.getGroups().add(group);
+            return ResponseEntity.ok(userService.updateUser(user.getId(), user));
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+
+    @PostMapping("/register")
+    public void register(@RequestBody Register register) {
+        if (this.userRepo.existsByEmail(register.email())) {
+            throw new RuntimeException("Email ocupado");
+        }
+
+        User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, null, null, null);
+        this.userRepo.save(user);
+
+    }
+
+
+    @PostMapping("/login")
+    public Token login(@RequestBody Login login) {
+        if (!this.userRepo.existsByEmail(login.email())) {
+            throw new NoSuchElementException("Usuario no encontrado!");
+        }
+
+        User user = this.userRepo.findByEmail(login.email()).orElseThrow();
+
+        if (!user.getPassword().equals(login.password())) {
+            throw new RuntimeException("Las passwords no coinciden");
+        }
+
+//        String token = Jwts.builder()
+//                .signWith(Keys.hmacShaKeyFor("admin".getBytes()), SignatureAlgorithm.HS512)
+//                .setHeaderParam("typ", "JWT")
+//                .setSubject(String.valueOf(user.getId()))
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date(System.currentTimeMillis() + (3600 * 24 * 1000)))
+//                .claim("email", user.getEmail())
+//                .claim("role", "admin")
+//                .compact();
+
+//        String token = Jwts.builder()
+//                // id del usuario
+//                .subject(String.valueOf(user.getId()))
+//                // La clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend
+//                .signWith(Keys.hmacShaKeyFor("admin1234admin1234admin1234admin1234admin1234admin1234".getBytes()))
+//                // Fecha emisión del token
+//                .issuedAt(new Date())
+//                // información personalizada: rol, username, email...
+//                .claim("role", "admin")
+//                // Construye el token
+//                .compact();
+
+        Date issuedDate = new Date();
+        long nextWeekMillis = TimeUnit.DAYS.toMillis(7);
+        Date expirationDate = new Date(issuedDate.getTime() + nextWeekMillis);
+        byte[] key = Base64.getDecoder().decode("FZD5maIaX04mYCwsgckoBh1NJp6T3t62h2MVyEtdo3w=");
+
+        String token = Jwts.builder()
+                // id del usuario
+                .subject(String.valueOf(user.getId()))
+                // La clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend
+                .signWith(Keys.hmacShaKeyFor(key))
+                // Fecha emisión del token
+                .issuedAt(issuedDate)
+                // Fecha de expiración del token
+                .expiration(expirationDate)
+                // información personalizada: rol, username, email...
+                .claim("role", "admin")
+                // Construye el token
+                .compact();
+
+        return new Token(token);
+
     }
 }

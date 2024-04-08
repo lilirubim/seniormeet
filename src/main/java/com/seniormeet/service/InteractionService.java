@@ -13,4 +13,11 @@ public interface InteractionService {
     Interaction findById(Long id);
 
 
+    Interaction save(Interaction interaction);
+
+    void deleteById(Long id);
+
+    Interaction save(Long id, Interaction interaction);
+
+    boolean deleteInteraction(Long id);
 }

@@ -1,5 +1,6 @@
 package com.seniormeet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,23 +11,19 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "sm_group")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String description;
-
     private String rules;
     private String photoUrl;
 
-    private String user;
-    //puse esto para relacionar con USUARIO fgfg
-    @ManyToMany
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("groups")
+    @ToString.Exclude
     private List<User> users = new ArrayList<>();
 }
