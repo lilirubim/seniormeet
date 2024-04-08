@@ -23,14 +23,14 @@ INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Environment
 -- sm_hobby
 INSERT INTO `sm_hobby` (`description`, `name`, `photo_url`) VALUES
 ('Escuchar música, cantar o aprender a tocar un instrumento. La música es el lenguaje del alma','Música','musica.jpg'),
-('Tomar fotos de la familia, paisajes o momentos especiales.','Fotografía','foto.jpg'),
-('Salir a caminar por tu lugar favorito. Mantenerse activo y disfrutar del aire fresco es vital','Caminatas','caminata.jpg'),
-('Expresar sentimientos y creatividad a través de colores y formas. Darle vida a tus ideas. Todos podemos ser artistas','Pintura y Dibujo','pintura.jpg'),
+('Salir a caminar por tu lugar favorito. Mantenerse activo y disfrutar del aire fresco es vital','Caminatas','caminando.jpg'),
+('Disfrutar bailando diferentes estilos...','Bailar','bailando.jpg'),
+('Expresar sentimientos y creatividad a través de colores y formas. Darle vida a tus ideas. Todos podemos ser artistas','Pintura y Dibujo','pintando.jpg'),
 ('Perderse en las páginas de un buen libro o revista. a lectura es una ventana a nuevos mundos, historias y conocimientos.','Lectura','leyendo.jpg'),
-('Preparar esos platos o dulces que tanto te gustan. Cocinar es un arte que alimenta tanto el cuerpo como el alma.','Cocina','cocinando_hombre.jpg'),
-('Disfrutar de un café mientras se charla con amigos. Es una buena forma de compartir historias, risas y buenos momentos','Ratitos de Café y Charla','mayores_tomando_cafe.jpg'),
-('Viajar a nuevos destinos y descubrir diferentes culturas','Viajar','viajar.jpg'),
-('Aprender y disfrutar utilizando de las nuevas tecnologías','Tecnología','tecnologia.jpg'),
+('Preparar esos platos o dulces que tanto te gustan. Cocinar es un arte que alimenta tanto el cuerpo como el alma.','Cocina','cocinando.jpg'),
+('Disfrutar de un café mientras se charla con amigos. Es una buena forma de compartir historias, risas y buenos momentos','Ratitos de Café y Charla','tomando_cafe.jpg'),
+('Viajar a nuevos destinos y descubrir diferentes culturas','Viajar','viajando.jpg'),
+('Tomar fotos de la familia, paisajes o momentos especiales.','Fotografía','fotografia.jpg'),
 ('Escribir historias, poemas o llevar un diario personal. La escritura es una excelente manera de expresar pensamientos y sentimientos, y puede ser una actividad muy gratificante.','Escribir','escribiendo.jpg');
 -- sm_post
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Great content', 'https://example.com/photo1.jpg', null);
