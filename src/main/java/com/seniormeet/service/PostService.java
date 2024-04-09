@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface PostService {
 
-    List<Post> findPosts();
+    Set<Post> findPosts();
 
     Post findById(Long id);
 

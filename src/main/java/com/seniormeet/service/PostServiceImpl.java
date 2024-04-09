@@ -9,6 +9,7 @@ import com.seniormeet.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -29,8 +30,9 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Post> findPosts() {
-        return postRepository.findAll();
+    public Set<Post> findPosts() {
+
+        return new HashSet<>(postRepository.findAll());
     }
 
     @Override

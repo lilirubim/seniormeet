@@ -31,8 +31,8 @@ public class PostController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Post>> findAll() {
-        List<Post> posts = postService.findPosts();
+    public ResponseEntity<Set<Post>> findAll() {
+        Set<Post> posts = postService.findPosts();
         return ResponseEntity.ok(posts);
     }
 
