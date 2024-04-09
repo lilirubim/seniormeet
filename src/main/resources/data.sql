@@ -56,16 +56,16 @@ INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, share
 INSERT INTO sm_interaction (liked, saved, shared,  liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-12 12:00:00.000000', '2022-01-11 12:00:00.000000', '2022-01-12 12:00:00.000000');
 INSERT INTO sm_interaction (liked, saved, shared,liked_date, saved_date, shared_date) VALUES (1, 0, 1, '2022-01-02 12:00:00.000000', '2022-01-03 12:00:00.000000', '2022-01-04 12:00:00.000000');
 -- sm_comment
-INSERT INTO sm_comment (user_id, content) VALUES (1, "Great post!");
-INSERT INTO sm_comment (user_id, content) VALUES (2, "Thanks for sharing!");
-INSERT INTO sm_comment (user_id, content) VALUES (3, "Interesting perspective...");
-INSERT INTO sm_comment (user_id, content) VALUES (4, "Good job.");
-INSERT INTO sm_comment (user_id, content) VALUES (5, "Nice work.");
-INSERT INTO sm_comment (user_id, content) VALUES (6, "What a great idea!");
-INSERT INTO sm_comment (user_id, content) VALUES (7, "Well done.");
-INSERT INTO sm_comment (user_id, content) VALUES (8, "Keep up the good work.");
-INSERT INTO sm_comment (user_id, content) VALUES (9, "Very informative.");
-INSERT INTO sm_comment (user_id, content) VALUES (10, "Excellent share.");
+INSERT INTO sm_comment (user_id, content,date) VALUES (1, "Great post!", '2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (2, "Thanks for sharing!",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (3, "Interesting perspective...",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (4, "Good job.",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (5, "Nice work.",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (6, "What a great idea!",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (7, "Well done.",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (8, "Keep up the good work.",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (9, "Very informative.",'2024-10-01');
+INSERT INTO sm_comment (user_id, content,date) VALUES (10, "Excellent share.",'2024-10-01');
 --
 INSERT INTO sm_user_groups (group_id, user_id) VALUES (1, 1);
 INSERT INTO sm_user_groups (group_id, user_id) VALUES (2, 2);
