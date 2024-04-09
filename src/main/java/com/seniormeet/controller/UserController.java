@@ -6,6 +6,7 @@ import com.seniormeet.dto.Token;
 import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
+import com.seniormeet.model.UserRole;
 import com.seniormeet.repository.UserRepository;
 import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
@@ -132,7 +133,7 @@ public class UserController {
             throw new RuntimeException("Email ocupado");
         }
 
-        User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, null, null, null);
+        User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, UserRole.USER, null, null);
         this.userRepo.save(user);
 
     }
@@ -187,7 +188,8 @@ public class UserController {
                 // Fecha de expiración del token
                 .expiration(expirationDate)
                 // información personalizada: rol, username, email...
-                .claim("role", "admin")
+                .claim("role", user.getRole())
+                .claim("email", user.getEmail())
                 // Construye el token
                 .compact();
 
