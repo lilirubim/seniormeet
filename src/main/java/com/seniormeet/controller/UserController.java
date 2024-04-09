@@ -8,6 +8,7 @@ import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
 import com.seniormeet.model.UserRole;
 import com.seniormeet.repository.UserRepository;
+import com.seniormeet.service.FileService;
 import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -32,6 +33,7 @@ public class UserController {
     private final UserService userService;
     private final GroupService groupService;
     private final UserRepository userRepo;
+    private FileService fileService;
 
     public UserController(UserService userService, GroupService groupService, UserRepository userRepo) {
         this.userService = userService;
@@ -83,14 +85,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-//    @PostMapping("/upload")
-//    public ResponseEntity<String> uploadPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
-//        User u = userService.savePhoto(file);
-//        if (u!=null)
-//            return ResponseEntity.ok("Foto subida correctamente");
-//        else
-//            return ResponseEntity.status(500).body("Error al guardar la imagen");
-//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -100,6 +94,40 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // Post para la foto
+
+    @PostMapping("/photo")
+    public User create(
+            @RequestParam(value = "photo", required = false) MultipartFile file,
+            User user){
+
+        if(file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            user.setPhotoUrl(fileName);
+        } else {
+            user.setPhotoUrl("avatar.png");
+        }
+
+        return this.userRepo.save(user);
+    }
+
+    // Put para la foto
+    @PutMapping("/photo/{id}")
+    public ResponseEntity<User> update(
+            @PathVariable Long id,
+            User user,
+            @RequestParam(value = "photo", required = false) MultipartFile file
+    ){
+        if(!this.userRepo.existsById(id))
+            return ResponseEntity.notFound().build();
+
+        if(file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            user.setPhotoUrl(fileName);
+        }
+        return ResponseEntity.ok(this.userRepo.save(user));
     }
 
     @DeleteMapping("/{id}")

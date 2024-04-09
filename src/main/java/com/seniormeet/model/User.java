@@ -30,7 +30,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
-    private String photo;
+    private String photoUrl;
     private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
