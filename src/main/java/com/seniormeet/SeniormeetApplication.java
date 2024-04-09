@@ -1,15 +1,15 @@
 package com.seniormeet;
 
-import com.seniormeet.model.*;
+import com.seniormeet.model.Group;
+import com.seniormeet.model.Sexo;
+import com.seniormeet.model.User;
+import com.seniormeet.model.UserRole;
 import com.seniormeet.repository.GroupRepository;
-import com.seniormeet.repository.HobbyRepository;
-import com.seniormeet.repository.InteractionRepository;
 import com.seniormeet.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -31,7 +31,7 @@ public class SeniormeetApplication {
 				"user1",
 				"user1",
 				"user1@gmail.com",
-				"password",
+				"12345678",
 				"777777",
 				"24011",
 				"Madrid",
