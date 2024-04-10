@@ -33,12 +33,13 @@ public class UserController {
     private final UserService userService;
     private final GroupService groupService;
     private final UserRepository userRepo;
-    private FileService fileService;
+    private final FileService fileService;
 
-    public UserController(UserService userService, GroupService groupService, UserRepository userRepo) {
+    public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService) {
         this.userService = userService;
         this.groupService = groupService;
         this.userRepo = userRepo;
+        this.fileService = fileService;
     }
 
     @GetMapping
