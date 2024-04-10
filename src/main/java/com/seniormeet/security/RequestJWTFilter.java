@@ -20,6 +20,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -81,7 +82,7 @@ public class RequestJWTFilter extends OncePerRequestFilter {
         // Obligatorio starter Spring Security en pom.xml
         User user = userOptional.get();
         SimpleGrantedAuthority role = new SimpleGrantedAuthority(user.getRole().name());
-        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, null);
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, List.of(role));
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         // Dejar pasar la peticion para q continue

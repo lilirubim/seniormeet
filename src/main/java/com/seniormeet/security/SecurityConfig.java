@@ -1,5 +1,6 @@
 package com.seniormeet.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -9,10 +10,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
+    private final RequestJWTFilter jwtFilter;
+
+    public SecurityConfig(RequestJWTFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
+
     /*
     Personalizar el objeto HttpSecurity de Spring para utilizar nuestro filtro JWT
     y proteger controladores
      */
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Sin estados, sin sesiones Http ya q usamos token jwt
         // Jwt es sin estados y no depende de sesiones o cookies
@@ -22,6 +30,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("user/login").permitAll()
                 .requestMatchers("user/register").permitAll()
+                //.requestMatchers(HttpMethod.POST, "user/**").hasAuthority(UserRole.ADMIN.name())
                 .anyRequest().authenticated();
 
         // asignar nuestro filtro personalizado de Jwt
