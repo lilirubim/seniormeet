@@ -1,6 +1,8 @@
 package com.seniormeet.security;
 
 
+import com.seniormeet.model.User;
+import com.seniormeet.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -8,12 +10,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Optional;
 
 /*
 Clase para:
@@ -27,6 +34,12 @@ Clase para:
 @Component
 @Slf4j
 public class RequestJWTFilter extends OncePerRequestFilter {
+
+    private final UserRepository userRepository;
+
+    public RequestJWTFilter(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -55,7 +68,23 @@ public class RequestJWTFilter extends OncePerRequestFilter {
         log.info("Id de usuario {} ", userId);
 
 
-        // Dejar pasar a la petición para que continúe
+        // 3- Obtener user con el id del token
+        Optional<User> userOptional = this.userRepository.findById(Long.valueOf(userId));
+        if (userOptional.isEmpty()) {
+            log.warn("Usuario no encontrado ", userId);
+            // no hay usuario error 401 UNAUTHORIZED
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        // 4- Crear objeto con datos del user en el contexto de seguridad Spring Security
+        // Obligatorio starter Spring Security en pom.xml
+        User user = userOptional.get();
+        SimpleGrantedAuthority role = new SimpleGrantedAuthority(user.getRole().name());
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        // Dejar pasar la peticion para q continue
         filterChain.doFilter(request, response);
     }
 }
