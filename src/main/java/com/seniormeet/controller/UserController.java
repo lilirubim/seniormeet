@@ -44,6 +44,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
+        //SecurityUtils.getCurrentUser().ifPresent(System.out::println);
         List<User> users = userService.findUsers();
         return ResponseEntity.ok(users);
     }
