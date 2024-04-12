@@ -83,9 +83,18 @@ public class PostServiceImpl implements PostService{
     @Override
     public Boolean addInteractionToPost(Post post, Interaction interaction) {
          if (post!=null && interaction!=null){
-            post.getInteractions().add(interaction);
-            postRepository.save(post);
-            return true;
+            if (post.getInteractions().contains(interaction))
+            {
+                post.getInteractions().remove(interaction);
+                postRepository.save(post);
+                interactionRepository.delete(interaction);
+                return false;
+
+            } else {
+                post.getInteractions().add(interaction);
+                postRepository.save(post);
+                return true;
+            }
         }
         return false;
     }

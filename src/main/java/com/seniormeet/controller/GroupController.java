@@ -4,11 +4,13 @@ import com.seniormeet.model.Group;
 import com.seniormeet.model.User;
 import com.seniormeet.repository.GroupRepository;
 import com.seniormeet.repository.InteractionRepository;
+import com.seniormeet.service.FileService;
 import com.seniormeet.service.GroupService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class GroupController {
 
     private GroupService groupService;
     private final InteractionRepository interactionRepository;
+    private FileService fileService;
+    private GroupService groupRepository;
 
 
     @GetMapping
@@ -40,8 +44,21 @@ public class GroupController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<Group> create(@RequestBody Group group) {
-        return ResponseEntity.ok(groupService.save(group));
+    //public ResponseEntity<Group> create(@RequestBody Group group) {
+    //return ResponseEntity.ok(groupService.save(group));
+    //}
+    public Group create(
+            @RequestParam(value = "photo", required = false) MultipartFile file,
+            Group group){
+
+        if(file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            group.setPhotoUrl(fileName);
+        } else {
+            group.setPhotoUrl("avatar.png");
+        }
+
+        return this.groupRepository.save(group);
     }
 
     @PutMapping("/{id}")
