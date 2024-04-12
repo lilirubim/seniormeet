@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/post")
@@ -30,8 +31,8 @@ public class PostController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Post>> findAll() {
-        List<Post> posts = postService.findPosts();
+    public ResponseEntity<Set<Post>> findAll() {
+        Set<Post> posts = postService.findPosts();
         return ResponseEntity.ok(posts);
     }
 
@@ -66,14 +67,14 @@ public class PostController {
     }
 
     @GetMapping("/{postId}/interactions")
-    public ResponseEntity<List<Interaction>> getPostInteractions(@PathVariable Long postId){
-        List<Interaction> interactions = postService.getPostInteractions(postId);
+    public ResponseEntity<Set<Interaction>> getPostInteractions(@PathVariable Long postId){
+        Set<Interaction> interactions = postService.getPostInteractions(postId);
         return ResponseEntity.ok(interactions);
     }
 
     @GetMapping("{postId}/comments")
-    public ResponseEntity<List<Comment>> getPostComments(@PathVariable Long postId){
-       List<Comment> comments = postService.getPostComments(postId);
+    public ResponseEntity<Set<Comment>> getPostComments(@PathVariable Long postId){
+       Set<Comment> comments = postService.getPostComments(postId);
        return ResponseEntity.ok(comments);
     }
 

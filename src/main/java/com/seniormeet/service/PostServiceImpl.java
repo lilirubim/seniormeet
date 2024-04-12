@@ -9,8 +9,10 @@ import com.seniormeet.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -28,8 +30,9 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Post> findPosts() {
-        return postRepository.findAll();
+    public Set<Post> findPosts() {
+
+        return new HashSet<>(postRepository.findAll());
     }
 
     @Override
@@ -66,13 +69,13 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Interaction> getPostInteractions(Long postId) {
+    public Set<Interaction> getPostInteractions(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         return post.getInteractions();
     }
 
     @Override
-    public List<Comment> getPostComments(Long postId) {
+    public Set<Comment> getPostComments(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         return post.getComments();
     }
@@ -80,9 +83,18 @@ public class PostServiceImpl implements PostService{
     @Override
     public Boolean addInteractionToPost(Post post, Interaction interaction) {
          if (post!=null && interaction!=null){
-            post.getInteractions().add(interaction);
-            postRepository.save(post);
-            return true;
+            if (post.getInteractions().contains(interaction))
+            {
+                post.getInteractions().remove(interaction);
+                postRepository.save(post);
+                interactionRepository.delete(interaction);
+                return false;
+
+            } else {
+                post.getInteractions().add(interaction);
+                postRepository.save(post);
+                return true;
+            }
         }
         return false;
     }

@@ -5,10 +5,11 @@ import com.seniormeet.model.Interaction;
 import com.seniormeet.model.Post;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PostService {
 
-    List<Post> findPosts();
+    Set<Post> findPosts();
 
     Post findById(Long id);
 
@@ -18,9 +19,9 @@ public interface PostService {
 
     boolean deletePost(Long id);
 
-    List<Interaction> getPostInteractions(Long postId);
+    Set<Interaction> getPostInteractions(Long postId);
 
-    List<Comment> getPostComments(Long postId);
+    Set<Comment> getPostComments(Long postId);
 
    Boolean addInteractionToPost(Post post, Interaction interaction);
 

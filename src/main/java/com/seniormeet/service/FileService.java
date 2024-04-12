@@ -1,6 +1,5 @@
 package com.seniormeet.service;
 
-
 import com.seniormeet.exception.FileException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -60,4 +59,3 @@ public class FileService {
     }
 
 }
-

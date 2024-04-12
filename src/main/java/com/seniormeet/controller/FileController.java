@@ -1,6 +1,5 @@
 package com.seniormeet.controller;
 
-
 import com.seniormeet.service.FileService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
