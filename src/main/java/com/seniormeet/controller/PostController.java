@@ -1,11 +1,10 @@
 package com.seniormeet.controller;
 
-import com.seniormeet.model.Comment;
-import com.seniormeet.model.Interaction;
-import com.seniormeet.model.Post;
+import com.seniormeet.model.*;
 import com.seniormeet.service.CommentService;
 import com.seniormeet.service.InteractionService;
 import com.seniormeet.service.PostService;
+import com.seniormeet.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +22,13 @@ public class PostController {
     private final PostService postService;
     private final InteractionService interactionService;
     private final CommentService commentService;
+    private final UserService userService;
 
-    public PostController(PostService postService, InteractionService interactionService, CommentService commentService) {
+    public PostController(PostService postService, InteractionService interactionService, CommentService commentService, UserService userService) {
                this.postService = postService;
                this.interactionService = interactionService;
                this.commentService = commentService;
+               this.userService = userService;
     }
 
     @GetMapping()
@@ -93,6 +94,40 @@ public class PostController {
         Post post = postService.findById(postId);
         Comment comment = commentService.findById(commentId);
         if (postService.addCommentToPost(post, comment))
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("{postId}/add-like/{userId}")
+    public ResponseEntity<Boolean> addLikeToPost(@PathVariable Long postId, @PathVariable Long userId){
+        Post post = postService.findById(postId);
+        User user = userService.findById(userId);
+        Interaction interaction = new Interaction();
+        interaction.setPost(post);
+        interaction.setType(InteractionType.LIKE);
+        interaction.setUser(user);
+       // interactionsUser = user.getInteractions();
+        //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo LIKE
+        //Si no está la grabamos
+        // Si está la borramos
+        if (interactionService.save(interaction)!=null)
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("{postId}/add-save/{userId}")
+    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId){
+        Post post = postService.findById(postId);
+        User user = userService.findById(userId);
+        Interaction interaction = new Interaction();
+        interaction.setPost(post);
+        interaction.setType(InteractionType.SAVE);
+        interaction.setUser(user);
+        // interactionsUser = user.getInteractions();
+        //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo SAVE
+        //Si no está la grabamos
+        // Si está la borramos
+        if (interactionService.save(interaction)!=null)
             return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
     }
