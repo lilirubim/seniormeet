@@ -110,9 +110,15 @@ public class PostController {
         //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo LIKE
         //Si no está la grabamos
         // Si está la borramos
-        if (interactionService.save(interaction)!=null)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+        for(Interaction i: post.getInteractions())
+        {
+            if (i.getUser().getId()==userId && i.getType()==InteractionType.LIKE){
+                interactionService.deleteById(i.getId());
+                return ResponseEntity.notFound().build();
+            }
+        }
+        interactionService.save(interaction);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("{postId}/add-save/{userId}")
@@ -127,9 +133,15 @@ public class PostController {
         //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo SAVE
         //Si no está la grabamos
         // Si está la borramos
-        if (interactionService.save(interaction)!=null)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+        for(Interaction i: post.getInteractions())
+        {
+            if (i.getUser().getId()==userId && i.getType()==InteractionType.SAVE){
+                interactionService.deleteById(i.getId());
+                return ResponseEntity.notFound().build();
+            }
+        }
+        interactionService.save(interaction);
+        return ResponseEntity.noContent().build();
     }
 
 }
