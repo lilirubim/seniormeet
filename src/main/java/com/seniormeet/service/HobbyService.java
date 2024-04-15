@@ -3,9 +3,10 @@ package com.seniormeet.service;
 import com.seniormeet.model.Hobby;
 
 import java.util.List;
+import java.util.Set;
 
 public interface HobbyService {
-    public List<Hobby> findAll();
+    public Set<Hobby> findAll();
     public Hobby findById(Long Id);
 
 
