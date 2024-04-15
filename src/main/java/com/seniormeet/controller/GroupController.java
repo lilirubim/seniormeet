@@ -47,13 +47,13 @@ public class GroupController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("create")
     //public ResponseEntity<Group> create(@RequestBody Group group) {
     //return ResponseEntity.ok(groupService.save(group));
     //}
     public ResponseEntity<Group> create(
             @RequestParam(value = "photo", required = false) MultipartFile file,
-            @RequestBody Group group){
+            Group group){
 
         if(file != null && !file.isEmpty()) {
             String fileName = fileService.store(file);
