@@ -4,8 +4,10 @@ import com.seniormeet.model.Hobby;
 import com.seniormeet.repository.HobbyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class HobbyServiceImpl implements HobbyService {
@@ -17,8 +19,8 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
-    public List<Hobby> findAll() {
-        List<Hobby> hobbies = hobbyRepository.findAll();
+    public Set<Hobby> findAll() {
+        Set<Hobby> hobbies = new HashSet<>(hobbyRepository.findAll());
         return hobbies;
     }
 
@@ -36,8 +38,8 @@ public class HobbyServiceImpl implements HobbyService {
             existingHobby.setName(hobby.getName());
             existingHobby.setDescription(hobby.getDescription());
             return hobbyRepository.save(existingHobby);
-        } else {
-        return null;}
+        }
+        return null;
     }
 
     @Override
@@ -51,9 +53,9 @@ public class HobbyServiceImpl implements HobbyService {
             if (hobbyOptional.isPresent()) {
                 hobbyRepository.deleteById(id);
                 return true;
-            } else {
-                return false;
             }
+            return false;
+
         }
 
 }
