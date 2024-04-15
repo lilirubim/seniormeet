@@ -238,7 +238,7 @@ public class UserController {
 
     @PutMapping("/account")
     public User update(@RequestParam(value = "photo", required = false) MultipartFile file
-                ,@RequestBody User user) {
+                , User user) {
         // Si está autenticado y es ADMIN o es el mismo usuario que la variable user
         // entonces actualizar, en caso contrario no actualizamos
         SecurityUtils.getCurrentUser().ifPresent(currentUser-> {
