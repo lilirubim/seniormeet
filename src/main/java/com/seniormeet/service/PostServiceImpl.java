@@ -9,10 +9,7 @@ import com.seniormeet.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -77,7 +74,9 @@ public class PostServiceImpl implements PostService{
     @Override
     public Set<Comment> getPostComments(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
-        return post.getComments();
+        List<Comment> comments = new ArrayList<>(post.getComments());
+        Collections.sort(comments, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return new HashSet<>(comments);
     }
 
     @Override
