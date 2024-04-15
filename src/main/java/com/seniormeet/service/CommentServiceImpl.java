@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Set<Comment> findComments() {
 
-        return new HashSet<>(commentRepository.findAll());
+        return new HashSet<>(commentRepository.findAllByOrderByDateDesc());
     }
 
     @Override
