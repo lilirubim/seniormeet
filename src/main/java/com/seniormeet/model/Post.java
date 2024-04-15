@@ -41,9 +41,9 @@ public class Post {
     )
     @JsonIgnoreProperties("posts")
     @ToString.Exclude
-    Set<Interaction> interactions = new HashSet<>();
+    private Set<Interaction> interactions = new HashSet<>();
 
     @OneToMany
-    Set<Comment> comments = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
 
 }

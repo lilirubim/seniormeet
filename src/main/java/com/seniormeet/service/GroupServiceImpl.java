@@ -5,8 +5,10 @@ import com.seniormeet.model.User;
 import com.seniormeet.repository.GroupRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -19,8 +21,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> findGroup() {
-        return groupRepository.findAll();
+    public Set<Group> findGroup() {
+        return new HashSet<>(groupRepository.findAll());
     }
 
     @Override
@@ -29,7 +31,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group save(Group group) {
+    public Group createGroup(Group group) {
         return groupRepository.save(group);
     }
 
@@ -44,9 +46,9 @@ public class GroupServiceImpl implements GroupService {
             existingGroup.setPhotoUrl(group.getPhotoUrl());
             // Actualizar otras propiedades según sea necesario
             return groupRepository.save(existingGroup);
-        } else {
-            return null;
         }
+        return null;
+
 
     }
 
@@ -57,9 +59,9 @@ public class GroupServiceImpl implements GroupService {
         if (userOptional.isPresent()) {
             groupRepository.deleteById(id);
             return true;
-        } else {
-            return false;
         }
+        return false;
+
 
     }
 }

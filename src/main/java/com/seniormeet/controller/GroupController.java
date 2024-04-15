@@ -8,11 +8,13 @@ import com.seniormeet.service.FileService;
 import com.seniormeet.service.GroupService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -30,8 +32,8 @@ public class GroupController {
 
 
     @GetMapping
-    public ResponseEntity<List<Group>> findAll() {
-        List<Group> groups = groupService.findGroup();
+    public ResponseEntity<Set<Group>> findAll() {
+        Set<Group> groups = groupService.findGroup();
         log.info("REST request to findAll groups");
         return ResponseEntity.ok(groups);
     }
@@ -39,7 +41,9 @@ public class GroupController {
     @GetMapping("/{id}")
     public ResponseEntity<Group> findById(@PathVariable Long id){
         Group group = groupService.findById(id);
-        return ResponseEntity.ok(group);
+        if (group!=null)
+            return ResponseEntity.ok(group);
+        return ResponseEntity.notFound().build();
     }
 
 
@@ -47,9 +51,9 @@ public class GroupController {
     //public ResponseEntity<Group> create(@RequestBody Group group) {
     //return ResponseEntity.ok(groupService.save(group));
     //}
-    public Group create(
+    public ResponseEntity<Group> create(
             @RequestParam(value = "photo", required = false) MultipartFile file,
-            Group group){
+            @RequestBody Group group){
 
         if(file != null && !file.isEmpty()) {
             String fileName = fileService.store(file);
@@ -57,8 +61,9 @@ public class GroupController {
         } else {
             group.setPhotoUrl("avatar.png");
         }
+        Group createdGroup = groupService.createGroup(group);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
 
-        return this.groupRepository.save(group);
     }
 
     @PutMapping("/{id}")

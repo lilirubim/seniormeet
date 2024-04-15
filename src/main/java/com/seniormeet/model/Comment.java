@@ -20,11 +20,11 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String content;
+    private String content;
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    User user;
+    private User user;
 
     //Fecha del comentario
     private LocalDateTime date;
