@@ -21,16 +21,17 @@ INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Viajeros ex
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Amantes de la música', 'musica.png', 'Hablamos de música, solistas y  bandas', 'Amantes de la música');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Huertos urbanos', 'huerto.jpg', 'Promueve los huertos sostenible', 'Huerto');
 -- sm_hobby
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Playing musical instruments', 'Music', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Capturing beautiful moments through photography', 'Photography', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring new hiking trails and nature', 'Hiking', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Creating art and expressing creativity through painting', 'Art', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Reading and discussing books of various genres', 'Reading', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Cooking and experimenting with different recipes', 'Cooking', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Staying fit and active through various workout routines', 'Fitness', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Traveling to new destinations and experiencing different cultures', 'Travel', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Advocating for environmental sustainability and eco-friendly practices', 'Sustainability', 'https://picsum.photos/id/944/900/500');
-INSERT INTO sm_hobby (description, name, photo_url) VALUES ('Exploring and learning about new technologies and coding', 'Tech', 'https://picsum.photos/id/944/900/500');
+INSERT INTO `sm_hobby` (`description`, `name`, `photo_url`) VALUES
+('Escuchar música, cantar o aprender a tocar un instrumento. La música es el lenguaje del alma','Música','musica.jpg'),
+('Salir a caminar por tu lugar favorito. Mantenerse activo y disfrutar del aire fresco es vital','Caminatas','caminando.jpg'),
+('Disfrutar bailando diferentes estilos...','Bailar','bailando.jpg'),
+('Expresar sentimientos y creatividad a través de colores y formas. Darle vida a tus ideas. Todos podemos ser artistas','Pintura y Dibujo','pintando.jpg'),
+('Perderse en las páginas de un buen libro o revista. a lectura es una ventana a nuevos mundos, historias y conocimientos.','Lectura','leyendo.jpg'),
+('Preparar esos platos o dulces que tanto te gustan. Cocinar es un arte que alimenta tanto el cuerpo como el alma.','Cocina','cocinando.jpg'),
+('Disfrutar de un café mientras se charla con amigos. Es una buena forma de compartir historias, risas y buenos momentos','Ratitos de Café y Charla','tomando_cafe.jpg'),
+('Viajar a nuevos destinos y descubrir diferentes culturas','Viajar','viajando.jpg'),
+('Tomar fotos de la familia, paisajes o momentos especiales.','Fotografía','fotografia.jpg'),
+('Escribir historias, poemas o llevar un diario personal. La escritura es una excelente manera de expresar pensamientos y sentimientos, y puede ser una actividad muy gratificante.','Escribir','escribiendo.jpg');
 -- sm_post
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Great content', 'https://example.com/photo1.jpg', null);
 INSERT INTO sm_post (content, photo_url, video_url) VALUES ('Interesting article', null, null);

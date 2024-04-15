@@ -39,6 +39,8 @@ public class HobbyController {
         return ResponseEntity.notFound().build();
     }
 
+
+    // MultipartFile
     @PostMapping()
     public ResponseEntity<Hobby> create(@RequestBody Hobby hobby) {
         Hobby createdHobby = hobbyService.save(hobby);
