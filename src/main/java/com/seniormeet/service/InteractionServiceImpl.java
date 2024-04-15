@@ -1,6 +1,7 @@
 package com.seniormeet.service;
 
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.InteractionType;
 import com.seniormeet.repository.InteractionRepository;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,11 @@ public class InteractionServiceImpl implements InteractionService{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Interaction findByPost_IdAndUser_IdAndType(Long postId, Long userId, InteractionType type) {
+        return this.interactionRepository.findByPost_IdAndUser_IdAndType(postId, userId, type);
+
     }
 }

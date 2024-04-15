@@ -1,6 +1,7 @@
 package com.seniormeet.service;
 
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.InteractionType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface InteractionService {
     Interaction save(Long id, Interaction interaction);
 
     boolean deleteInteraction(Long id);
+
+    Interaction findByPost_IdAndUser_IdAndType(Long postId, Long userId, InteractionType type);
+
 }

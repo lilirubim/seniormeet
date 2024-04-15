@@ -7,7 +7,9 @@ import com.seniormeet.service.PostService;
 import com.seniormeet.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -94,31 +96,73 @@ public class PostController {
         Post post = postService.findById(postId);
         Comment comment = commentService.findById(commentId);
         if (postService.addCommentToPost(post, comment))
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
     }
 
     @PostMapping("{postId}/add-like/{userId}")
     public ResponseEntity<Boolean> addLikeToPost(@PathVariable Long postId, @PathVariable Long userId){
+        /* TODO
+        teniendo la seguridad JWT ya no hace falta pasar el userId en la url
+        Extraemos el usuario de User user = SEcurityUtils.getCurrentuser()
+         *
+         */
+
         Post post = postService.findById(postId);
         User user = userService.findById(userId);
+        Interaction interaction = this.interactionService.findByPost_IdAndUser_IdAndType(post.getId(), user.getId(), InteractionType.LIKE);
+
+        if (interaction == null) {
+            // EL USUARIO HA PULSADO LIKE
+            interaction = new Interaction();
+            interaction.setPost(post);
+            interaction.setType(InteractionType.LIKE);
+            interaction.setUser(user);
+            interaction = this.interactionService.save(interaction);
+            post.getInteractions().add(interaction);
+            this.postService.updatePost(post.getId(), post);
+            return ResponseEntity.ok(true);
+        }
+
+        // EL USUARIO QUIERE QUITAR EL LIKE
+        Interaction finalInteraction = interaction;
+        boolean removed = post.getInteractions().removeIf(currentInter -> currentInter.getId().equals(finalInteraction.getId()));
+        if (removed) {
+            this.postService.updatePost(post.getId(), post);
+            interactionService.deleteById(interaction.getId());
+            return ResponseEntity.ok(false);
+        } else {
+            // HAY INTERACTION PERO NO SE HA PODIDO BORRAR, HAY PROBLEMAS
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
+
+        /*
         Interaction interaction = new Interaction();
         interaction.setPost(post);
         interaction.setType(InteractionType.LIKE);
         interaction.setUser(user);
-       // interactionsUser = user.getInteractions();
-        //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo LIKE
+
+        //Debermos averiguar si las interacciones del post hay alguna del mismo usuario y de tipo LIKE
         //Si no está la grabamos
         // Si está la borramos
+        boolean removed = post.getInteractions().removeIf(currentInter -> currentInter.getUser().getId()==userId && currentInter.getType()==InteractionType.LIKE);
+        if (removed) {
+            interactionService.deleteById(interaction.getId());
+        }
+
         for(Interaction i: post.getInteractions())
         {
             if (i.getUser().getId()==userId && i.getType()==InteractionType.LIKE){
                 interactionService.deleteById(i.getId());
+                //postService.deleteInteractionFromPost(i);
                 return ResponseEntity.notFound().build();
             }
         }
         interactionService.save(interaction);
         return ResponseEntity.noContent().build();
+        */
+
     }
 
     @PostMapping("{postId}/add-save/{userId}")
