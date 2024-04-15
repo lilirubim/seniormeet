@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,28 +26,24 @@ public class Post {
 
     private String videoUrl; //video de youtube
 
-    //@OneToOne
-    //private Group group;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
-    // si se pone lazy entonces hay que hacer un JPQL
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("posts")
-    //@JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    // terminadas en many ya son lazy por defecto no hace falta ponerlo
-//    @ManyToMany()
-//    @JoinTable(name = "sm_post_interactions",
-//            joinColumns = @JoinColumn(name = "post_id"),
-//            inverseJoinColumns = @JoinColumn(name = "interaction_id")
-//    )
+    @ManyToMany
+    @JoinTable(name = "sm_post_interactions",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "interaction_id")
+    )
+    @JsonIgnoreProperties("posts")
+    @ToString.Exclude
+    private Set<Interaction> interactions = new HashSet<>();
 
-
-//    @JsonIgnoreProperties("posts")
-//    @ToString.Exclude
-//    List<Interaction> interactions = new ArrayList<>();
-
-    //@OneToMany
-    //List<Comment> comments;
+    @OneToMany
+    private Set<Comment> comments = new HashSet<>();
 
 }

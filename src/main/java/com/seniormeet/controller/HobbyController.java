@@ -4,10 +4,13 @@ import com.seniormeet.model.Hobby;
 import com.seniormeet.service.HobbyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+
 @AllArgsConstructor
 @RestController
 @CrossOrigin("*")
@@ -23,22 +26,25 @@ public class HobbyController {
    // }
 
     @GetMapping
-    public ResponseEntity<List<Hobby>> findAll() {
-        List<Hobby> hobbies = hobbyService.findAll();
+    public ResponseEntity<Set<Hobby>> findAll() {
+        Set<Hobby> hobbies = hobbyService.findAll();
         return ResponseEntity.ok(hobbies);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Hobby> findById(@PathVariable Long id) {
         Hobby hobby = hobbyService.findById(id);
-        return ResponseEntity.ok(hobby);
+        if (hobby!=null)
+            return ResponseEntity.ok(hobby);
+        return ResponseEntity.notFound().build();
     }
 
 
     // MultipartFile
     @PostMapping()
     public ResponseEntity<Hobby> create(@RequestBody Hobby hobby) {
-        return  ResponseEntity.ok (hobbyService.save(hobby));
+        Hobby createdHobby = hobbyService.save(hobby);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(createdHobby);
     }
 
    @PutMapping("/{id}")
@@ -56,8 +62,8 @@ public class HobbyController {
         boolean deleted = hobbyService.deleteHobby(id);
         if (deleted) {
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
+
    }
 }

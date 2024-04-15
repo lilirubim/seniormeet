@@ -1,6 +1,6 @@
 package com.seniormeet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 @Entity
 @Table(name = "sm_user")
 public class User {
@@ -30,8 +31,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
-    private String photo;
-    @Column(columnDefinition = "boolean")
+    private String photoUrl;
     private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -42,7 +42,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    @JsonIgnoreProperties("users")
+    //@JsonIgnoreProperties("users")
+    @JsonIgnore
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
@@ -52,7 +53,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
-    @JsonIgnoreProperties("users")
+    //@JsonIgnoreProperties("users")
+    @JsonIgnore
     @ToString.Exclude
     private List<Hobby> hobbies = new ArrayList<>();
 
