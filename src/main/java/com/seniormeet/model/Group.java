@@ -7,7 +7,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.*;
 
-//se agrego metodos
+//se agrego métodos
 @Getter
 @Setter
 @NoArgsConstructor

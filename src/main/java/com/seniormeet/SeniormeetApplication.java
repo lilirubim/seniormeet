@@ -38,7 +38,7 @@ public class SeniormeetApplication {
 				Sexo.FEMENINO,
 				null,
 				null, true,
-				UserRole.USER, List.of(group1), null);
+				UserRole.ADMIN, List.of(group1), null);
 		userRepository.saveAll(List.of(user1));
 
 
