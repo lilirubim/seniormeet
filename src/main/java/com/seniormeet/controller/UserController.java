@@ -237,8 +237,7 @@ public class UserController {
 
 
     @PutMapping("/account")
-    public User update(@RequestParam(value = "photo", required = false) MultipartFile file
-                ,@RequestBody User user) {
+    public User update(@RequestParam(value = "photo", required = false) MultipartFile file, User user) {
         // Si está autenticado y es ADMIN o es el mismo usuario que la variable user
         // entonces actualizar, en caso contrario no actualizamos
         SecurityUtils.getCurrentUser().ifPresent(currentUser-> {
@@ -247,8 +246,11 @@ public class UserController {
                 if(file != null && !file.isEmpty()) {
                     String fileName = fileService.store(file);
                     user.setPhotoUrl(fileName);
-                    this.userRepo.save(user);
                 }
+                // No perder password ni role
+                user.setPassword(currentUser.getPassword());
+                user.setRole(currentUser.getRole());
+                this.userRepo.save(user);
             } else {
                 throw new RuntimeException("No puede actualizar");
             }
