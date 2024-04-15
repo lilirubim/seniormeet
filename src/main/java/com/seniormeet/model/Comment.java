@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -19,11 +20,14 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String content;
+    private String content;
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    User user;
+    private User user;
+
+    //Fecha del comentario
+    private LocalDateTime date;
 
     @Override
     public final boolean equals(Object o) {

@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Set<Comment> findComments() {
 
-        return new HashSet<>(commentRepository.findAll());
+        return new HashSet<>(commentRepository.findAllByOrderByDateDesc());
     }
 
     @Override
@@ -40,6 +40,7 @@ public class CommentServiceImpl implements CommentService {
         if (commentOptional.isPresent()){
             Comment existingComment = commentOptional.get();
             existingComment.setContent(comment.getContent());
+            existingComment.setDate(comment.getDate());
             return commentRepository.save(existingComment);
         }
         return null;
