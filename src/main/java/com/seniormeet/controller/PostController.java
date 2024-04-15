@@ -169,23 +169,33 @@ public class PostController {
     public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId){
         Post post = postService.findById(postId);
         User user = userService.findById(userId);
-        Interaction interaction = new Interaction();
-        interaction.setPost(post);
-        interaction.setType(InteractionType.SAVE);
-        interaction.setUser(user);
-        // interactionsUser = user.getInteractions();
-        //Debermos averiguar si las interacciones de un usuario con un post está incluida una de tipo SAVE
-        //Si no está la grabamos
-        // Si está la borramos
-        for(Interaction i: post.getInteractions())
-        {
-            if (i.getUser().getId()==userId && i.getType()==InteractionType.SAVE){
-                interactionService.deleteById(i.getId());
-                return ResponseEntity.notFound().build();
-            }
+        Interaction interaction = this.interactionService.findByPost_IdAndUser_IdAndType(post.getId(), user.getId(), InteractionType.SAVE);
+
+        if (interaction == null) {
+            // EL USUARIO HA PULSADO SAVE
+            interaction = new Interaction();
+            interaction.setPost(post);
+            interaction.setType(InteractionType.SAVE);
+            interaction.setUser(user);
+            interaction = this.interactionService.save(interaction);
+            post.getInteractions().add(interaction);
+            this.postService.updatePost(post.getId(), post);
+            return ResponseEntity.ok(true);
         }
-        interactionService.save(interaction);
-        return ResponseEntity.noContent().build();
+
+        // EL USUARIO QUIERE QUITAR EL SAVE
+        Interaction finalInteraction = interaction;
+        boolean removed = post.getInteractions().removeIf(currentInter -> currentInter.getId().equals(finalInteraction.getId()));
+        if (removed) {
+            this.postService.updatePost(post.getId(), post);
+            interactionService.deleteById(interaction.getId());
+            return ResponseEntity.ok(false);
+        } else {
+            // HAY INTERACTION PERO NO SE HA PODIDO BORRAR, HAY PROBLEMAS
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
+        
     }
 
 }
