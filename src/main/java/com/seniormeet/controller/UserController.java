@@ -8,6 +8,7 @@ import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
 import com.seniormeet.model.UserRole;
 import com.seniormeet.repository.UserRepository;
+import com.seniormeet.security.SecurityUtils;
 import com.seniormeet.service.FileService;
 import com.seniormeet.service.GroupService;
 import com.seniormeet.service.UserService;
@@ -19,10 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "*")
@@ -44,7 +42,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        //SecurityUtils.getCurrentUser().ifPresent(System.out::println);
+        SecurityUtils.getCurrentUser().ifPresent(System.out::println);
         List<User> users = userService.findUsers();
         return ResponseEntity.ok(users);
     }
@@ -153,7 +151,6 @@ public class UserController {
         }
 
         return ResponseEntity.notFound().build();
-
     }
 
 
@@ -163,9 +160,13 @@ public class UserController {
             throw new RuntimeException("Email ocupado");
         }
 
-        User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, UserRole.USER, null, null);
+        //User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, UserRole.USER, null, null);
+        User user = User.builder()
+                .email(register.email())
+                .password(register.password())
+                .role(UserRole.USER)
+                .build();
         this.userRepo.save(user);
-
     }
 
 
@@ -225,5 +226,33 @@ public class UserController {
 
         return new Token(token);
 
+    }
+
+
+    @GetMapping("/account")
+    public User getCurrentUser() {
+        SecurityUtils.getCurrentUser().ifPresent(System.out::println);
+        return SecurityUtils.getCurrentUser().orElseThrow();
+    }
+
+
+    @PutMapping("/account")
+    public User update(@RequestParam(value = "photo", required = false) MultipartFile file
+                ,@RequestBody User user) {
+        // Si está autenticado y es ADMIN o es el mismo usuario que la variable user
+        // entonces actualizar, en caso contrario no actualizamos
+        SecurityUtils.getCurrentUser().ifPresent(currentUser-> {
+            if (currentUser.getRole() == UserRole.ADMIN || Objects.equals(currentUser.getId(), user.getId())) {
+
+                if(file != null && !file.isEmpty()) {
+                    String fileName = fileService.store(file);
+                    user.setPhotoUrl(fileName);
+                    this.userRepo.save(user);
+                }
+            } else {
+                throw new RuntimeException("No puede actualizar");
+            }
+        });
+        return user;
     }
 }
