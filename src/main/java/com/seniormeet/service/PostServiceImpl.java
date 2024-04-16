@@ -50,6 +50,7 @@ public class PostServiceImpl implements PostService{
             existingPost.setPhotoUrl(post.getPhotoUrl());
             existingPost.setVideoUrl(post.getVideoUrl());
             existingPost.setContent(post.getContent());
+            existingPost.setDate(post.getDate());
             return postRepository.save(existingPost);
         }
         return null;
