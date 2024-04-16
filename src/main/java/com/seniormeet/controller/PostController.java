@@ -75,6 +75,18 @@ public class PostController {
         return ResponseEntity.ok(interactions);
     }
 
+    @GetMapping ("{postId}/interactions/likes")
+    public ResponseEntity<List<Interaction>> getPostLikes(@PathVariable Long postId){
+        List<Interaction> likes = postService.getPostLikes(postId);
+        return ResponseEntity.ok(likes);
+    }
+
+    @GetMapping ("{postId}/interactions/saves")
+    public ResponseEntity<List<Interaction>> getPostSaves(@PathVariable Long postId){
+        List<Interaction> saves = postService.getPostSaves(postId);
+        return ResponseEntity.ok(saves);
+    }
+
     @GetMapping("{postId}/comments")
     public ResponseEntity<List<Comment>> getPostComments(@PathVariable Long postId){
        List<Comment> comments = postService.getPostComments(postId);

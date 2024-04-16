@@ -21,6 +21,10 @@ public interface PostService {
 
     List<Interaction> getPostInteractions(Long postId);
 
+    List<Interaction> getPostLikes(Long postId);
+
+    List<Interaction> getPostSaves(Long postId);
+
     List<Comment> getPostComments(Long postId);
 
    Boolean addInteractionToPost(Post post, Interaction interaction);

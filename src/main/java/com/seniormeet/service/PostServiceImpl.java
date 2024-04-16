@@ -2,6 +2,7 @@ package com.seniormeet.service;
 
 import com.seniormeet.model.Comment;
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.InteractionType;
 import com.seniormeet.model.Post;
 import com.seniormeet.repository.CommentRepository;
 import com.seniormeet.repository.InteractionRepository;
@@ -71,6 +72,32 @@ public class PostServiceImpl implements PostService{
     public List<Interaction> getPostInteractions(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         return new ArrayList<>(post.getInteractions());
+    }
+
+    @Override
+    public List<Interaction> getPostLikes(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        List<Interaction> interactions = new ArrayList<>(post.getInteractions());
+        List<Interaction> likes = new ArrayList<>();
+        for(Interaction i : interactions){
+            if (i.getType()== InteractionType.LIKE)
+                likes.add(i);
+        }
+
+        return likes;
+    }
+
+    @Override
+    public List<Interaction> getPostSaves(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        List<Interaction> interactions = new ArrayList<>(post.getInteractions());
+        List<Interaction> saves = new ArrayList<>();
+        for(Interaction i : interactions){
+            if (i.getType()== InteractionType.SAVE)
+                saves.add(i);
+        }
+
+        return saves;
     }
 
     @Override
