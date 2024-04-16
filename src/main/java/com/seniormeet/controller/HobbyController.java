@@ -26,8 +26,8 @@ public class HobbyController {
    // }
 
     @GetMapping
-    public ResponseEntity<Set<Hobby>> findAll() {
-        Set<Hobby> hobbies = hobbyService.findAll();
+    public ResponseEntity<List<Hobby>> findAll() {
+        List<Hobby> hobbies = hobbyService.findAll();
         return ResponseEntity.ok(hobbies);
     }
 
