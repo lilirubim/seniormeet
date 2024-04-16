@@ -28,7 +28,7 @@ public class User {
     private String phone;
     private String codigoPostal;
     private String ciudad;
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
     private String photoUrl;

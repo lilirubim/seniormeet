@@ -113,7 +113,8 @@ public class PostController {
     }
 
     @PostMapping("{postId}/add-like/{userId}")
-    public ResponseEntity<Boolean> addLikeToPost(@PathVariable Long postId, @PathVariable Long userId){
+    public ResponseEntity<Boolean> addLikeToPost(@PathVariable Long postId, @PathVariable Long userId,
+                                                 @RequestBody Interaction interactionLike){
         /* TODO
         teniendo la seguridad JWT ya no hace falta pasar el userId en la url
         Extraemos el usuario de User user = SEcurityUtils.getCurrentuser()
@@ -126,12 +127,12 @@ public class PostController {
 
         if (interaction == null) {
             // EL USUARIO HA PULSADO LIKE
-            interaction = new Interaction();
-            interaction.setPost(post);
-            interaction.setType(InteractionType.LIKE);
-            interaction.setUser(user);
-            interaction = this.interactionService.save(interaction);
-            post.getInteractions().add(interaction);
+//            interaction = new Interaction();
+//            interaction.setPost(post);
+//            interaction.setType(InteractionType.LIKE);
+//            interaction.setUser(user);
+            //interaction =  this.interactionService.save(interactionLike);
+            post.getInteractions().add(interactionLike);
             this.postService.updatePost(post.getId(), post);
             return ResponseEntity.ok(true);
         }
@@ -178,19 +179,19 @@ public class PostController {
     }
 
     @PostMapping("{postId}/add-save/{userId}")
-    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId){
+    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId, @RequestBody Interaction interactionSave){
         Post post = postService.findById(postId);
         User user = userService.findById(userId);
         Interaction interaction = this.interactionService.findByPost_IdAndUser_IdAndType(post.getId(), user.getId(), InteractionType.SAVE);
 
         if (interaction == null) {
             // EL USUARIO HA PULSADO SAVE
-            interaction = new Interaction();
-            interaction.setPost(post);
-            interaction.setType(InteractionType.SAVE);
-            interaction.setUser(user);
-            interaction = this.interactionService.save(interaction);
-            post.getInteractions().add(interaction);
+//            interaction = new Interaction();
+//            interaction.setPost(post);
+//            interaction.setType(InteractionType.SAVE);
+//            interaction.setUser(user);
+//            interaction = this.interactionService.save(interaction);
+            post.getInteractions().add(interactionSave);
             this.postService.updatePost(post.getId(), post);
             return ResponseEntity.ok(true);
         }
