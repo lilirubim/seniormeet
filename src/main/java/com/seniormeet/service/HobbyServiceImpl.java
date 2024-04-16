@@ -19,9 +19,8 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
-    public Set<Hobby> findAll() {
-        Set<Hobby> hobbies = new HashSet<>(hobbyRepository.findAll());
-        return hobbies;
+    public List<Hobby> findAll() {
+        return hobbyRepository.findAll();
     }
 
     @Override

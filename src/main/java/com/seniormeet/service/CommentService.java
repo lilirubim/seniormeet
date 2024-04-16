@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface CommentService {
-    Set<Comment> findComments();
+    List<Comment> findComments();
 
     Comment findById(Long id);
 

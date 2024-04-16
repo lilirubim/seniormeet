@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface HobbyService {
-    public Set<Hobby> findAll();
+    public List<Hobby> findAll();
     public Hobby findById(Long Id);
 
 

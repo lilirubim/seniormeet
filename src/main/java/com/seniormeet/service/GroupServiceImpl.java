@@ -21,8 +21,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Set<Group> findGroup() {
-        return new HashSet<>(groupRepository.findAll());
+    public List<Group> findGroup() {
+        return groupRepository.findAll();
     }
 
     @Override

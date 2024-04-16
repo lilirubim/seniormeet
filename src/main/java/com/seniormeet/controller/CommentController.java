@@ -24,8 +24,8 @@ public class CommentController {
     }
 
     @GetMapping()
-    public ResponseEntity<Set<Comment>> findAll(){
-        Set<Comment> comments = commentService.findComments();
+    public ResponseEntity<List<Comment>> findAll(){
+        List<Comment> comments = commentService.findComments();
         return ResponseEntity.ok(comments);
 
     }

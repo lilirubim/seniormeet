@@ -10,7 +10,7 @@ import java.util.Set;
 public interface GroupService {
 
     //Interface
-    Set<Group> findGroup();
+    List<Group> findGroup();
 
     Group findById(Long id);
 

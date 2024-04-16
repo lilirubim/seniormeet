@@ -2,6 +2,7 @@ package com.seniormeet.service;
 
 import com.seniormeet.model.Comment;
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.InteractionType;
 import com.seniormeet.model.Post;
 import com.seniormeet.repository.CommentRepository;
 import com.seniormeet.repository.InteractionRepository;
@@ -27,9 +28,10 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Set<Post> findPosts() {
-
-        return new HashSet<>(postRepository.findAll());
+    public List<Post> findPosts() {
+        List<Post> posts = postRepository.findAll();
+        Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return posts;
     }
 
     @Override
@@ -50,6 +52,7 @@ public class PostServiceImpl implements PostService{
             existingPost.setPhotoUrl(post.getPhotoUrl());
             existingPost.setVideoUrl(post.getVideoUrl());
             existingPost.setContent(post.getContent());
+            existingPost.setDate(post.getDate());
             return postRepository.save(existingPost);
         }
         return null;
@@ -66,17 +69,43 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Set<Interaction> getPostInteractions(Long postId) {
+    public List<Interaction> getPostInteractions(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
-        return post.getInteractions();
+        return new ArrayList<>(post.getInteractions());
     }
 
     @Override
-    public Set<Comment> getPostComments(Long postId) {
+    public List<Interaction> getPostLikes(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        List<Interaction> interactions = new ArrayList<>(post.getInteractions());
+        List<Interaction> likes = new ArrayList<>();
+        for(Interaction i : interactions){
+            if (i.getType()== InteractionType.LIKE)
+                likes.add(i);
+        }
+
+        return likes;
+    }
+
+    @Override
+    public List<Interaction> getPostSaves(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        List<Interaction> interactions = new ArrayList<>(post.getInteractions());
+        List<Interaction> saves = new ArrayList<>();
+        for(Interaction i : interactions){
+            if (i.getType()== InteractionType.SAVE)
+                saves.add(i);
+        }
+
+        return saves;
+    }
+
+    @Override
+    public List<Comment> getPostComments(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         List<Comment> comments = new ArrayList<>(post.getComments());
         Collections.sort(comments, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
-        return new HashSet<>(comments);
+        return comments;
     }
 
     @Override
