@@ -131,8 +131,8 @@ public class PostController {
 //            interaction.setPost(post);
 //            interaction.setType(InteractionType.LIKE);
 //            interaction.setUser(user);
-            //interaction =  this.interactionService.save(interactionLike);
-            post.getInteractions().add(interactionLike);
+            interaction =  this.interactionService.save(interactionLike);
+            post.getInteractions().add(interaction);
             this.postService.updatePost(post.getId(), post);
             return ResponseEntity.ok(true);
         }

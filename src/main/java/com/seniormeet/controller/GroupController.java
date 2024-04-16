@@ -1,5 +1,6 @@
 package com.seniormeet.controller;
 
+import com.seniormeet.model.Comment;
 import com.seniormeet.model.Group;
 import com.seniormeet.model.User;
 import com.seniormeet.repository.GroupRepository;
@@ -44,6 +45,12 @@ public class GroupController {
         if (group!=null)
             return ResponseEntity.ok(group);
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("{groupId}/users")
+    public ResponseEntity<List<User>> getGroupUsers(@PathVariable Long groupId){
+        List<User> users = groupService.getGroupUsers(groupId);
+        return ResponseEntity.ok(users);
     }
 
 

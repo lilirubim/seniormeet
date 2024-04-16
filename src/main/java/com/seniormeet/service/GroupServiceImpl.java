@@ -1,14 +1,14 @@
 package com.seniormeet.service;
 
+import com.seniormeet.model.Comment;
 import com.seniormeet.model.Group;
+import com.seniormeet.model.Post;
 import com.seniormeet.model.User;
 import com.seniormeet.repository.GroupRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -23,6 +23,13 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Group> findGroup() {
         return groupRepository.findAll();
+    }
+
+    @Override
+    public List<User> getGroupUsers(Long groupId) {
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new EntityNotFoundException("Group not found"));
+        List<User> users = new ArrayList<>(group.getUsers());
+        return users;
     }
 
     @Override
