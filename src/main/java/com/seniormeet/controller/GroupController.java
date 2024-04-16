@@ -32,8 +32,8 @@ public class GroupController {
 
 
     @GetMapping
-    public ResponseEntity<Set<Group>> findAll() {
-        Set<Group> groups = groupService.findGroup();
+    public ResponseEntity<List<Group>> findAll() {
+        List<Group> groups = groupService.findGroup();
         log.info("REST request to findAll groups");
         return ResponseEntity.ok(groups);
     }
