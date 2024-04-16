@@ -4,10 +4,7 @@ import com.seniormeet.model.Comment;
 import com.seniormeet.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -19,9 +16,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Set<Comment> findComments() {
+    public List<Comment> findComments() {
 
-        return new HashSet<>(commentRepository.findAllByOrderByDateDesc());
+        return new ArrayList<>(commentRepository.findAllByOrderByDateDesc());
     }
 
     @Override
