@@ -27,9 +27,10 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Set<Post> findPosts() {
-
-        return new HashSet<>(postRepository.findAll());
+    public List<Post> findPosts() {
+        List<Post> posts = postRepository.findAll();
+        Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return posts;
     }
 
     @Override
@@ -67,17 +68,17 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Set<Interaction> getPostInteractions(Long postId) {
+    public List<Interaction> getPostInteractions(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
-        return post.getInteractions();
+        return new ArrayList<>(post.getInteractions());
     }
 
     @Override
-    public Set<Comment> getPostComments(Long postId) {
+    public List<Comment> getPostComments(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         List<Comment> comments = new ArrayList<>(post.getComments());
         Collections.sort(comments, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
-        return new HashSet<>(comments);
+        return comments;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface PostService {
 
-    Set<Post> findPosts();
+    List<Post> findPosts();
 
     Post findById(Long id);
 
@@ -19,9 +19,9 @@ public interface PostService {
 
     boolean deletePost(Long id);
 
-    Set<Interaction> getPostInteractions(Long postId);
+    List<Interaction> getPostInteractions(Long postId);
 
-    Set<Comment> getPostComments(Long postId);
+    List<Comment> getPostComments(Long postId);
 
    Boolean addInteractionToPost(Post post, Interaction interaction);
 
