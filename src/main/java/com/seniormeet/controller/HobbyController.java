@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.seniormeet.service.FileService;
 
 import java.util.List;
 import java.util.Set;
@@ -20,6 +22,7 @@ import java.util.Set;
 public class HobbyController {
 
     private HobbyService hobbyService;
+    private FileService fileService;
 
     // public HobbyController(HobbyService hobbyService) {
    //      this.hobbyService = hobbyService;
@@ -42,14 +45,24 @@ public class HobbyController {
 
     // MultipartFile
     @PostMapping()
-    public ResponseEntity<Hobby> create(@RequestBody Hobby hobby) {
+    public ResponseEntity<Hobby> create(@RequestParam(value = "photo", required = false) MultipartFile file,
+                                        Hobby hobby) {
+
+        if(file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            hobby.setPhotoUrl(fileName);
+        } else {
+            hobby.setPhotoUrl("avatar.png");
+        }
+
         Hobby createdHobby = hobbyService.save(hobby);
         return  ResponseEntity.status(HttpStatus.CREATED).body(createdHobby);
     }
 
    @PutMapping("/{id}")
-    public ResponseEntity<Hobby> updateHobby(@PathVariable Long id, @RequestBody Hobby hobby) {
+    public ResponseEntity<Hobby> updateHobby(@PathVariable Long id, Hobby hobby) {
         Hobby updateHobby = hobbyService.updateHobby(id, hobby);
+
         if (updateHobby != null) {
             return ResponseEntity.ok(updateHobby);
         } else {
