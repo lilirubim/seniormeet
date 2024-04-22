@@ -179,7 +179,9 @@ public class PostController {
     }
 
     @PostMapping("{postId}/add-save/{userId}")
-    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId, @RequestBody Interaction interactionSave){
+    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId,
+                                                 @PathVariable Long userId,
+                                                 @RequestBody Interaction interactionSave){
         Post post = postService.findById(postId);
         User user = userService.findById(userId);
         Interaction interaction = this.interactionService.findByPost_IdAndUser_IdAndType(post.getId(), user.getId(), InteractionType.SAVE);
@@ -191,6 +193,7 @@ public class PostController {
 //            interaction.setType(InteractionType.SAVE);
 //            interaction.setUser(user);
 //            interaction = this.interactionService.save(interaction);
+            this.interactionService.save(interactionSave);
             post.getInteractions().add(interactionSave);
             this.postService.updatePost(post.getId(), post);
             return ResponseEntity.ok(true);

@@ -23,8 +23,10 @@ public class Post {
 
     private String content; //Length = 5000 integrar un editor
 
+    @Column(name = "photo_url")
     private  String photoUrl;
 
+    @Column(name = "video_url")
     private String videoUrl; //video de youtube
 
     private LocalDate date;
@@ -42,7 +44,7 @@ public class Post {
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "interaction_id")
     )
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties("post")
     @ToString.Exclude
     private Set<Interaction> interactions = new HashSet<>();
 
