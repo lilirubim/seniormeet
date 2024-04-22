@@ -11,15 +11,15 @@ INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, r
 INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('judith@gmail.com', 'Judith', 'Blandin', 'user1234', '666777888', 'judith.jpg', 'USER');
 INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('@gmail.com', 'Javier', 'Baeza-Rojano', 'user1234', '666777888', 'javier.jpg', 'USER');
 -- sm_group
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Entusiastas de los paseos', 'caminata.jpg', 'Respeto por la naturaleza', 'Caminatas');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Enamorados de la fotografía', 'foto.jpg', 'Comparte tus mejores fotos y trucos', 'Club de Fotografía');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Cocina saludable y nutrition', 'cocina.jpg', 'Promueve comer saludable y compartir recetas', 'Club de Cocina');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comedores libro', 'lectura.jpg', 'Debate sobre tus libros y autores favoritos', 'Club de lectura');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Grupo de baile', 'baile.jpg', 'Aprende a bailar topo tipo de música', 'Entusiastas Bailadores');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comunidad de arte y pintura', 'arte.jpg', 'Comparte tus obras de arte y técnicas de pintura ', 'Arte y Pintura');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Viajeros exploradores', 'viajeros.jpg', 'Comparte tus viajes y explora nuevos destinos', 'Pasión por Viajar');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Amantes de la música', 'musica.png', 'Hablamos de música, solistas y  bandas', 'Amantes de la música');
-INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Huertos urbanos', 'huerto.jpg', 'Promueve los huertos sostenible', 'Huerto');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Entusiastas de los paseos, respeto por la naturaleza', 'caminata.jpg', 'Sábado 08:00hrs, Parque del Buen Retiro', 'Caminatas');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Enamorados de la fotografía, comparte tus mejores fotos y trucos', 'foto.jpg', ' Viernes 18:00hrs, Principe de Vergara 110', 'Club de Fotografía');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Cocina saludable y nutrition, ven y comparte tus recetas', 'cocina.jpg', 'Jueves 17:00hrs, Centro cultural "Edad Dorada"', 'Club de Cocina');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comedores libro, debate sobre tus libros y autores favoritos', 'lectura.jpg', 'Lunes y miércoles 17:00hrs, Biblioteca "José deL Hierro"', 'Club de lectura');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Grupo de baile, aprende todos los ritmos', 'baile.jpg', 'Viernes 19.00hrs, Escuela de Danza "Elena Rojo"', 'Bailadores');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Comunidad de arte y pintura, comparte tus técnicas y obras de arte', 'arte.jpg', 'Martes 16:00hrs, Centro cultural "Buena Esperanza"', 'Arte y Pintura');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Viajeros exploradores, viajes y nuevos destinos', 'viajeros.jpg', 'Lunes 19:00hrs, Biblioteca "José deL Hierro"', 'Pasión por Viajar');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Amantes de la música, Hablamos de música, solistas y  bandas', 'musica.png', 'Miércoles 18:00hrs, Centro cultural "Edad Dorada"', 'Club de música');
+INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Huertos urbanos, promovemos los huertos sostenible', 'huerto.jpg', 'Viernes 10:00hrs, parque "Pradolongo', 'Huerto');
 -- sm_hobby
 INSERT INTO `sm_hobby` (`description`, `name`, `photo_url`) VALUES
 ('Escuchar música, cantar o aprender a tocar un instrumento. La música es el lenguaje del alma','Música','musica.jpg'),
