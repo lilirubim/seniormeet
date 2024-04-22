@@ -31,6 +31,7 @@ public class User {
     //@Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
+    @Column(name="photo_url")
     private String photoUrl;
     private Boolean available;
     @Enumerated(EnumType.STRING)
