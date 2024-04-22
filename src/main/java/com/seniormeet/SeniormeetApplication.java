@@ -21,7 +21,7 @@ public class SeniormeetApplication {
 
 
 		GroupRepository groupRepo = context.getBean(GroupRepository.class);
-		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", "caminata.jpg", null);
+		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", "naturaleza.jpeg", null);
 		groupRepo.saveAll(List.of(group1));
 
 
