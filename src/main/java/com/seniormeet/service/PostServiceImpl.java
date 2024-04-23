@@ -30,6 +30,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public List<Post> findPosts() {
         List<Post> posts = postRepository.findAll();
+        posts.removeIf(post -> post.getDate() == null); // Eliminar posts con fecha nula
         Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
         return posts;
     }
