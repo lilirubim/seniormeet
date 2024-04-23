@@ -63,6 +63,14 @@ public class PostServiceImpl implements PostService{
     public boolean deletePost(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
         if (postOptional.isPresent()){
+            Set<Interaction> interactions = postOptional.get().getInteractions();
+            for (Interaction i: interactions){
+                interactionRepository.deleteById(i.getId());
+            }
+            Set<Comment> comments = postOptional.get().getComments();
+            for (Comment c: comments){
+                commentRepository.deleteById(c.getId());
+            }
             postRepository.deleteById(id);
             return true;
         }

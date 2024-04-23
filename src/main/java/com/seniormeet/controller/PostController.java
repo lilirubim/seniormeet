@@ -62,11 +62,11 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id){
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long id){
         boolean deletedPost = postService.deletePost(id);
         if (deletedPost)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(false);
+        return ResponseEntity.ok(true);
     }
 
     @GetMapping("/{postId}/interactions")
@@ -98,8 +98,8 @@ public class PostController {
         Post post = postService.findById(postId);
         Interaction interaction = interactionService.findById(interactionId);
         if (postService.addInteractionToPost(post, interaction))
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
 
     }
 
