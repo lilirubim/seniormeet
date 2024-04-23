@@ -11,6 +11,8 @@ public interface PostService {
 
     List<Post> findPosts();
 
+    List<Post> findPostsByUserId(Long userId);
+
     Post findById(Long id);
 
     Post createPost(Post post);
