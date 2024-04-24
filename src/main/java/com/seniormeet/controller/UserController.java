@@ -8,6 +8,7 @@ import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
 import com.seniormeet.model.UserRole;
+import com.seniormeet.repository.GroupRepository;
 import com.seniormeet.repository.UserRepository;
 import com.seniormeet.security.SecurityUtils;
 import com.seniormeet.service.FileService;
@@ -39,11 +40,16 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService, PasswordEncoder passwordEncoder) {
+    private final GroupRepository groupRepository;
+
+    public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService,
+                          GroupRepository groupRepository) {
         this.userService = userService;
         this.groupService = groupService;
         this.userRepo = userRepo;
         this.fileService = fileService;
         this.passwordEncoder = passwordEncoder;
+        this.groupRepository = groupRepository;
     }
 
     @GetMapping
@@ -61,6 +67,12 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("groups2/current-user")
+    public ResponseEntity<List<Group>> getUserGroups2() {
+        Long userId = SecurityUtils.getCurrentUser().orElseThrow().getId();
+        List<Group> groups = userService.getUserGroups(userId);
+        return ResponseEntity.ok(groups);
+    }
     @GetMapping("/{userId}/groups")
     public ResponseEntity<List<Group>> getUserGroups(@PathVariable Long userId) {
         List<Group> groups = userService.getUserGroups(userId);
@@ -154,7 +166,8 @@ public class UserController {
     @GetMapping("add-group/{id}")
     public ResponseEntity<User> addGroupToUser(@PathVariable Long id) {
         // TODO recuperar el usuario de base de datos gracias a la Security (lo hará Alan en clase)
-        User user = new User();
+        //User user = new User();
+        User user = SecurityUtils.getCurrentUser().orElseThrow();
         Group group = groupService.findById(id);
         if(!user.getGroups().contains(group)) {
             user.getGroups().add(group);

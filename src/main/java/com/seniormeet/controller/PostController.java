@@ -39,6 +39,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("user/{userId}")
+    public ResponseEntity<List<Post>> findPostsByUserId(@PathVariable Long userId) {
+        List<Post> posts = postService.findPostsByUserId(userId);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable Long id){
         Post post = postService.findById(id);
@@ -62,11 +68,11 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id){
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long id){
         boolean deletedPost = postService.deletePost(id);
         if (deletedPost)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(false);
+        return ResponseEntity.ok(true);
     }
 
     @GetMapping("/{postId}/interactions")
@@ -98,8 +104,8 @@ public class PostController {
         Post post = postService.findById(postId);
         Interaction interaction = interactionService.findById(interactionId);
         if (postService.addInteractionToPost(post, interaction))
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
 
     }
 
@@ -179,7 +185,9 @@ public class PostController {
     }
 
     @PostMapping("{postId}/add-save/{userId}")
-    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId, @PathVariable Long userId, @RequestBody Interaction interactionSave){
+    public ResponseEntity<Boolean> addSaveToPost(@PathVariable Long postId,
+                                                 @PathVariable Long userId,
+                                                 @RequestBody Interaction interactionSave){
         Post post = postService.findById(postId);
         User user = userService.findById(userId);
         Interaction interaction = this.interactionService.findByPost_IdAndUser_IdAndType(post.getId(), user.getId(), InteractionType.SAVE);
@@ -191,6 +199,7 @@ public class PostController {
 //            interaction.setType(InteractionType.SAVE);
 //            interaction.setUser(user);
 //            interaction = this.interactionService.save(interaction);
+            this.interactionService.save(interactionSave);
             post.getInteractions().add(interactionSave);
             this.postService.updatePost(post.getId(), post);
             return ResponseEntity.ok(true);

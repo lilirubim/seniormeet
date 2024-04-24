@@ -30,7 +30,14 @@ public class PostServiceImpl implements PostService{
     @Override
     public List<Post> findPosts() {
         List<Post> posts = postRepository.findAll();
+        posts.removeIf(post -> post.getDate() == null); // Eliminar posts con fecha nula
         Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return posts;
+    }
+
+    @Override
+    public List<Post> findPostsByUserId(Long userId) {
+        List<Post> posts = postRepository.findByUser_Id(userId);
         return posts;
     }
 
@@ -62,6 +69,14 @@ public class PostServiceImpl implements PostService{
     public boolean deletePost(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
         if (postOptional.isPresent()){
+            Set<Interaction> interactions = postOptional.get().getInteractions();
+            for (Interaction i: interactions){
+                interactionRepository.deleteById(i.getId());
+            }
+            Set<Comment> comments = postOptional.get().getComments();
+            for (Comment c: comments){
+                commentRepository.deleteById(c.getId());
+            }
             postRepository.deleteById(id);
             return true;
         }
