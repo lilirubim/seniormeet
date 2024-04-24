@@ -3,6 +3,7 @@ package com.seniormeet.controller;
 import com.seniormeet.dto.Login;
 import com.seniormeet.dto.Register;
 import com.seniormeet.dto.Token;
+import com.seniormeet.exception.NotModifiedException;
 import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
@@ -16,12 +17,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,12 +36,14 @@ public class UserController {
     private final GroupService groupService;
     private final UserRepository userRepo;
     private final FileService fileService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService) {
+    public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.groupService = groupService;
         this.userRepo = userRepo;
         this.fileService = fileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -103,13 +109,17 @@ public class UserController {
             @RequestParam(value = "photo", required = false) MultipartFile file,
             User user){
 
+        if (this.userRepo.existsByEmail(user.getEmail())) {
+            throw new BadCredentialsException("Email ocupado");
+        }
+
         if(file != null && !file.isEmpty()) {
             String fileName = fileService.store(file);
             user.setPhotoUrl(fileName);
         } else {
             user.setPhotoUrl("avatar.png");
         }
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepo.save(user);
     }
 
@@ -127,6 +137,7 @@ public class UserController {
             String fileName = fileService.store(file);
             user.setPhotoUrl(fileName);
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return ResponseEntity.ok(this.userRepo.save(user));
     }
 
@@ -157,13 +168,13 @@ public class UserController {
     @PostMapping("/register")
     public void register(@RequestBody Register register) {
         if (this.userRepo.existsByEmail(register.email())) {
-            throw new RuntimeException("Email ocupado");
+            throw new BadCredentialsException("Email ocupado");
         }
 
         //User user = new User(null, null, null, register.email(), register.password(),null, null, null, null, null, null, null, UserRole.USER, null, null);
         User user = User.builder()
                 .email(register.email())
-                .password(register.password())
+                .password(passwordEncoder.encode(register.password()))
                 .role(UserRole.USER)
                 .build();
         this.userRepo.save(user);
@@ -172,15 +183,13 @@ public class UserController {
 
     @PostMapping("/login")
     public Token login(@RequestBody Login login) {
-        if (!this.userRepo.existsByEmail(login.email())) {
+        if (!this.userRepo.existsByEmail(login.email()))
             throw new NoSuchElementException("Usuario no encontrado!");
-        }
 
         User user = this.userRepo.findByEmail(login.email()).orElseThrow();
 
-        if (!user.getPassword().equals(login.password())) {
-            throw new RuntimeException("Las passwords no coinciden");
-        }
+        if (!passwordEncoder.matches(login.password(), user.getPassword()))
+            throw new BadCredentialsException("Las passwords no coinciden");
 
 //        String token = Jwts.builder()
 //                .signWith(Keys.hmacShaKeyFor("admin".getBytes()), SignatureAlgorithm.HS512)
@@ -247,12 +256,10 @@ public class UserController {
                     String fileName = fileService.store(file);
                     user.setPhotoUrl(fileName);
                 }
-                // No perder password ni role
-                user.setPassword(currentUser.getPassword());
-                user.setRole(currentUser.getRole());
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
                 this.userRepo.save(user);
             } else {
-                throw new RuntimeException("No puede actualizar");
+                throw new NotModifiedException("No puede actualizar");
             }
         });
         return user;

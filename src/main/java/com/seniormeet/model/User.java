@@ -24,15 +24,17 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+//    @JsonIgnore
     private String password;
     private String phone;
     private String codigoPostal;
     private String ciudad;
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
     @Column(name="photo_url")
     private String photoUrl;
+    @Column(columnDefinition = "boolean")
     private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
