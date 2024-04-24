@@ -8,7 +8,6 @@ import com.seniormeet.model.Group;
 import com.seniormeet.model.Hobby;
 import com.seniormeet.model.User;
 import com.seniormeet.model.UserRole;
-import com.seniormeet.repository.GroupRepository;
 import com.seniormeet.repository.UserRepository;
 import com.seniormeet.security.SecurityUtils;
 import com.seniormeet.service.FileService;
@@ -39,17 +38,13 @@ public class UserController {
     private final FileService fileService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService, PasswordEncoder passwordEncoder) {
-    private final GroupRepository groupRepository;
-
     public UserController(UserService userService, GroupService groupService, UserRepository userRepo, FileService fileService,
-                          GroupRepository groupRepository) {
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.groupService = groupService;
         this.userRepo = userRepo;
         this.fileService = fileService;
         this.passwordEncoder = passwordEncoder;
-        this.groupRepository = groupRepository;
     }
 
     @GetMapping
