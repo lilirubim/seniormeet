@@ -69,10 +69,15 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deletePost(@PathVariable Long id){
+        Post post = postService.findById(id);
+        for(Interaction i: post.getInteractions())
+            interactionService.deleteById(i.getId());
+        for (Comment c: post.getComments())
+            commentService.deleteComment(c.getId());
         boolean deletedPost = postService.deletePost(id);
         if (deletedPost)
-            return ResponseEntity.ok(false);
-        return ResponseEntity.ok(true);
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
     }
 
     @GetMapping("/{postId}/interactions")
