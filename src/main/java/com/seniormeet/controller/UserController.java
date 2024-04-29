@@ -249,7 +249,9 @@ public class UserController {
     @GetMapping("/account")
     public User getCurrentUser() {
         SecurityUtils.getCurrentUser().ifPresent(System.out::println);
-        return SecurityUtils.getCurrentUser().orElseThrow();
+        User user = SecurityUtils.getCurrentUser().orElseThrow();
+        System.out.println(user.getGroups());
+        return user;
     }
 
 

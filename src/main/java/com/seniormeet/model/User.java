@@ -1,6 +1,7 @@
 package com.seniormeet.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,13 +41,13 @@ public class User {
     private UserRole role;
 
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "sm_user_groups",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    //@JsonIgnoreProperties("users")
-    @JsonIgnore
+    @JsonIgnoreProperties("users")
+    // @JsonIgnore
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
