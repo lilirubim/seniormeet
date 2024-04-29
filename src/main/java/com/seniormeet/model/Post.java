@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class Post {
     @Column(name = "video_url")
     private String videoUrl; //video de youtube
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "group_id")

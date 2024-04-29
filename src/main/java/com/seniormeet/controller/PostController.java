@@ -39,6 +39,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("user/{userId}")
+    public ResponseEntity<List<Post>> findPostsByUserId(@PathVariable Long userId) {
+        List<Post> posts = postService.findPostsByUserId(userId);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable Long id){
         Post post = postService.findById(id);
@@ -62,11 +68,16 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id){
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long id){
+        Post post = postService.findById(id);
+        for(Interaction i: post.getInteractions())
+            interactionService.deleteById(i.getId());
+        for (Comment c: post.getComments())
+            commentService.deleteComment(c.getId());
         boolean deletedPost = postService.deletePost(id);
         if (deletedPost)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
     }
 
     @GetMapping("/{postId}/interactions")
@@ -98,8 +109,8 @@ public class PostController {
         Post post = postService.findById(postId);
         Interaction interaction = interactionService.findById(interactionId);
         if (postService.addInteractionToPost(post, interaction))
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(true);
+        return ResponseEntity.ok(false);
 
     }
 

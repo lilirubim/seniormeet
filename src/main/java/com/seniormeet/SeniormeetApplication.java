@@ -9,6 +9,8 @@ import com.seniormeet.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.util.List;
 
@@ -24,15 +26,15 @@ public class SeniormeetApplication {
 		Group group1 = new Group(null, "Naturaleza", "Amantes de la Naturaleza", "Ganas de aventura", "naturaleza.jpeg", null);
 		groupRepo.saveAll(List.of(group1));
 
-
+		PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user1 = new User(
 				null,
 				"user1",
 				"user1",
 				"user1@gmail.com",
-				"12345678",
-				"777777",
+				passwordEncoder.encode("12345678"),
+				"777777777",
 				"24011",
 				"Madrid",
 				Sexo.FEMENINO,

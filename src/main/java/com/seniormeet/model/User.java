@@ -1,6 +1,7 @@
 package com.seniormeet.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,27 +25,29 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+//    @JsonIgnore
     private String password;
     private String phone;
     private String codigoPostal;
     private String ciudad;
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
     private LocalDate fechaNacimiento;
     @Column(name="photo_url")
     private String photoUrl;
+    @Column(columnDefinition = "boolean")
     private Boolean available;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "sm_user_groups",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    //@JsonIgnoreProperties("users")
-    @JsonIgnore
+    @JsonIgnoreProperties("users")
+    // @JsonIgnore
     @ToString.Exclude
     private List<Group> groups = new ArrayList<>();
 
