@@ -94,6 +94,16 @@ public class UserServiceImpl implements UserService {
         groupRepository.save(group);
     }
 
+    public void removeUserFromGroup(Long userId, Long groupId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new EntityNotFoundException("Group not found"));
+        user.getGroups().remove(group);
+        group.getUsers().remove(user);
+        userRepository.save(user);
+        groupRepository.save(group);
+
+    }
+
 
     public List<Group> getUserGroups(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));

@@ -26,6 +26,8 @@ public interface UserService {
 
     void addUserToGroup(Long userId, Long groupId);
 
+    void removeUserFromGroup(Long userId, Long groupId);
+
     List<Group> getUserGroups(Long userId);
 
     List<Hobby> getUserHobbies(Long userId);

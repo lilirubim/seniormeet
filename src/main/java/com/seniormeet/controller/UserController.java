@@ -86,6 +86,12 @@ public class UserController {
         return ResponseEntity.ok(true);
     }
 
+    @DeleteMapping("/{userId}/groups/{groupId}")
+    public ResponseEntity<Boolean> removeUserFromGroup(@PathVariable Long userId, @PathVariable Long groupId) {
+        userService.removeUserFromGroup(userId,groupId);
+        return ResponseEntity.ok(true);
+    }
+
     @PostMapping("/{userId}/hobbies/{hobbyId}")
     public ResponseEntity<String> addHobbyToUser(@PathVariable Long userId, @PathVariable Long hobbyId) {
         userService.addHobbyToUser(userId, hobbyId);
