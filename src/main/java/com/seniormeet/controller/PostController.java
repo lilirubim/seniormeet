@@ -1,16 +1,14 @@
 package com.seniormeet.controller;
 
 import com.seniormeet.model.*;
-import com.seniormeet.service.CommentService;
-import com.seniormeet.service.InteractionService;
-import com.seniormeet.service.PostService;
-import com.seniormeet.service.UserService;
+import com.seniormeet.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -26,11 +24,14 @@ public class PostController {
     private final CommentService commentService;
     private final UserService userService;
 
-    public PostController(PostService postService, InteractionService interactionService, CommentService commentService, UserService userService) {
+    private  final FileService fileService;
+
+    public PostController(PostService postService, InteractionService interactionService, CommentService commentService, UserService userService, FileService fileService) {
                this.postService = postService;
                this.interactionService = interactionService;
                this.commentService = commentService;
                this.userService = userService;
+               this.fileService = fileService;
     }
 
     @GetMapping()
@@ -54,7 +55,14 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Post> createPost(@RequestBody Post post){
+    public ResponseEntity<Post> createPost(@RequestParam(value = "photo", required = false) MultipartFile file,
+                                            Post post){
+        if(file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            post.setPhotoUrl(fileName);
+        } else {
+            post.setPhotoUrl("avatar.png");
+        }
         Post createdPost = postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
