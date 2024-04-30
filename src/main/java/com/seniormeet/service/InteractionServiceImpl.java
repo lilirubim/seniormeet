@@ -69,4 +69,9 @@ public class InteractionServiceImpl implements InteractionService{
         return this.interactionRepository.findByPost_IdAndUser_IdAndType(postId, userId, type);
 
     }
+
+    @Override
+    public List<Interaction> findByUser_IdAndType(Long userId, InteractionType type) {
+        return this.interactionRepository.findByUser_IdAndType(userId, type);
+    }
 }

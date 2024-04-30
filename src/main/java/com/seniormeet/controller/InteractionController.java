@@ -1,6 +1,7 @@
 package com.seniormeet.controller;
 
 import com.seniormeet.model.Interaction;
+import com.seniormeet.model.InteractionType;
 import com.seniormeet.service.InteractionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,18 @@ public class InteractionController {
         Interaction interaction = interactionService.findById(id);
         return ResponseEntity.ok(interaction);
 
+    }
+
+    @GetMapping("/user-likes/{userId}")
+    public ResponseEntity<List<Interaction>> findUserLikes(@PathVariable Long userId){
+        List<Interaction> likes = interactionService.findByUser_IdAndType(userId, InteractionType.LIKE);
+        return ResponseEntity.ok(likes);
+    }
+
+    @GetMapping("/user-likes/{userId}")
+    public ResponseEntity<List<Interaction>> findUserSaves(@PathVariable Long userId){
+        List<Interaction> saves = interactionService.findByUser_IdAndType(userId, InteractionType.SAVE);
+        return ResponseEntity.ok(saves);
     }
 
 

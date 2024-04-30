@@ -24,4 +24,6 @@ public interface InteractionService {
 
     Interaction findByPost_IdAndUser_IdAndType(Long postId, Long userId, InteractionType type);
 
+    List<Interaction> findByUser_IdAndType(Long userId, InteractionType type);
+
 }
