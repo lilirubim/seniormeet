@@ -40,7 +40,7 @@ public class InteractionController {
         return ResponseEntity.ok(likes);
     }
 
-    @GetMapping("/user-likes/{userId}")
+    @GetMapping("/user-saves/{userId}")
     public ResponseEntity<List<Interaction>> findUserSaves(@PathVariable Long userId){
         List<Interaction> saves = interactionService.findByUser_IdAndType(userId, InteractionType.SAVE);
         return ResponseEntity.ok(saves);
