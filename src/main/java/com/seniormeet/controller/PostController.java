@@ -46,6 +46,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("group/{groupId}")
+    public ResponseEntity<List<Post>> findPostByGroupId(@PathVariable Long groupId){
+        List<Post> posts = postService.findPostsByGroupId(groupId);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable Long id){
         Post post = postService.findById(id);
@@ -61,7 +67,7 @@ public class PostController {
             String fileName = fileService.store(file);
             post.setPhotoUrl(fileName);
         } else {
-            post.setPhotoUrl("avatar.png");
+            post.setPhotoUrl("");
         }
         Post createdPost = postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);

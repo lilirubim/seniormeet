@@ -42,6 +42,12 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public List<Post> findPostsByGroupId(Long groupId) {
+        List<Post> posts = postRepository.findByGroup_Id(groupId);
+        return posts;
+    }
+
+    @Override
     public Post findById(Long id) {
         return postRepository.findById(id).orElse(null);
     }

@@ -13,6 +13,8 @@ public interface PostService {
 
     List<Post> findPostsByUserId(Long userId);
 
+    List<Post> findPostsByGroupId(Long groupId);
+
     Post findById(Long id);
 
     Post createPost(Post post);
