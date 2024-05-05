@@ -11,6 +11,10 @@ public interface PostService {
 
     List<Post> findPosts();
 
+    List<Post> findPostsOnlyFromGroups();
+
+    List<Post> findPostsWithoutGroups();
+
     List<Post> findPostsByUserId(Long userId);
 
     List<Post> findPostsByGroupId(Long groupId);

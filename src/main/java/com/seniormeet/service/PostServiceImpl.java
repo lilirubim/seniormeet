@@ -36,6 +36,22 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public List<Post> findPostsOnlyFromGroups() {
+        List<Post> posts = postRepository.findByGroup_IdNotNull();
+        posts.removeIf(post -> post.getDate() == null); // Eliminar posts con fecha nula
+        Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return posts;
+    }
+
+    @Override
+    public List<Post> findPostsWithoutGroups() {
+        List<Post> posts = postRepository.findByGroup_IdNull();
+        posts.removeIf(post -> post.getDate() == null); // Eliminar posts con fecha nula
+        Collections.sort(posts, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return posts;
+    }
+
+    @Override
     public List<Post> findPostsByUserId(Long userId) {
         List<Post> posts = postRepository.findByUser_Id(userId);
         return posts;

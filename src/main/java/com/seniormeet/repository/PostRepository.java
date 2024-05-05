@@ -11,4 +11,10 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByUser_Id(Long userId);
 
     List<Post> findByGroup_Id(Long groupId);
+
+    List<Post> findByGroup_IdNotNull();
+
+    List<Post> findByGroup_IdNull();
+
+
 }

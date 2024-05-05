@@ -40,6 +40,18 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("only-groups")
+    public ResponseEntity<List<Post>> findAllOnlyFromGroups(){
+        List<Post> posts = postService.findPostsOnlyFromGroups();
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("without-groups")
+    public ResponseEntity<List<Post>> findAllWithoutGroups(){
+        List<Post> posts = postService.findPostsWithoutGroups();
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("user/{userId}")
     public ResponseEntity<List<Post>> findPostsByUserId(@PathVariable Long userId) {
         List<Post> posts = postService.findPostsByUserId(userId);
