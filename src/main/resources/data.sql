@@ -33,17 +33,17 @@ INSERT INTO `sm_hobby` (`description`, `name`, `photo_url`) VALUES
 ('Tomar fotos de la familia, paisajes o momentos especiales.','Fotografía','fotografia.jpg'),
 ('Escribir historias, poemas o llevar un diario personal. La escritura es una excelente manera de expresar pensamientos y sentimientos, y puede ser una actividad muy gratificante.','Escribir','escribiendo.jpg');
 -- sm_post
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Gran contenido', 'grancontenido.png', null, '2024-02-01');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Articulo interesante', 'articulo.jpg', null, '2024-01-12');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Nuevo grupo de Cocina', 'cocinando.jpg', null, '2024-03-15');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Nuevo Producto', 'nuevoproducto.jpg', null, '2024-03-28');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Aficiones Excitantes!', 'baile.jpg', null, '2024-02-11');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Divertido meme', 'meme.jpg', null, '2024-01-01');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Cita importante', 'evento.jpg', null, '2024-04-26');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Te invito a la reflexión', 'cita.jpg', null, '2024-04-30');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Feliz Viernes', 'happyFridays.jpg', null, '2024-04-26');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Recordatorio de  evento', 'evento.jpg', null, '2024-04-30');
-INSERT INTO sm_post (`content`, `photo_url`, `video_url`, `date`) VALUES ('Feliz Halloween!', 'halloween.jpg' , null, '2023-10-31');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (1, 'Gran contenido', 'grancontenido.png', null, '2024-02-01');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (1, 'Articulo interesante', 'articulo.jpg', null, '2024-01-12');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (3, 'Nuevo grupo de Cocina', 'cocinando.jpg', null, '2024-03-15');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (10, 'Nuevo Producto', 'nuevoproducto.jpg', null, '2024-03-28');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (7, 'Aficiones Excitantes!', 'baile.jpg', null, '2024-02-11');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (6, 'Divertido meme', 'meme.jpg', null, '2024-01-01');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (4, 'Cita importante', 'evento.jpg', null, '2024-04-26');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (2, 'Te invito a la reflexión', 'cita.jpg', null, '2024-04-30');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (8,'Feliz Viernes', 'happyFridays.jpg', null, '2024-04-22');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (5,'Recordatorio de  evento', 'evento.jpg', null, '2024-04-30');
+INSERT INTO sm_post (`user_id`, `content`, `photo_url`, `video_url`, `date`) VALUES (11,'Feliz Halloween!', 'halloween.jpg' , null, '2023-10-31');
 -- sm_interaction
 INSERT INTO sm_interaction (date, id, post_id, user_id, type) VALUES ('2022-01-12', 1, 1, 1, 'LIKE');
 INSERT INTO sm_interaction (date, id, post_id, user_id, type) VALUES ('2022-01-12', 2, 2, 2, 'SAVE');
