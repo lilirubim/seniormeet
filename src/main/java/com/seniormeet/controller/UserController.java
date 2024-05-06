@@ -133,6 +133,7 @@ public class UserController {
             user.setPhotoUrl("avatar.png");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setAvailable(true);
         return this.userRepo.save(user);
     }
 
@@ -190,6 +191,7 @@ public class UserController {
                 .email(register.email())
                 .password(passwordEncoder.encode(register.password()))
                 .role(UserRole.USER)
+                .available(true)
                 .build();
         this.userRepo.save(user);
     }

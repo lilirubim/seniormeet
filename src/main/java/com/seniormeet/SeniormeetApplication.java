@@ -34,14 +34,27 @@ public class SeniormeetApplication {
 				"user1",
 				"user1@gmail.com",
 				passwordEncoder.encode("12345678"),
-				"777777777",
-				"24011",
+				"674536745",
+				"28010",
 				"Madrid",
 				Sexo.FEMENINO,
 				null,
 				null, true,
-				UserRole.ADMIN, List.of(group1), null);
-		userRepository.saveAll(List.of(user1));
+				UserRole.USER, List.of(group1), null);
+		User user2 = new User(
+				null,
+				"admin",
+				"admin",
+				"admin@gmail.com",
+				passwordEncoder.encode("12345678"),
+				"777777777",
+				"28001",
+				"Madrid",
+				Sexo.FEMENINO,
+				null,
+				null, true,
+				UserRole.ADMIN, null, null);
+		userRepository.saveAll(List.of(user1, user2));
 
 
 //
