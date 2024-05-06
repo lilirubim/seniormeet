@@ -1,15 +1,15 @@
 -- sm_user
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('angel@gmail.com', 'Angel', 'Sigueros', '12345678', '666555444', 'angel.jpg', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('lili@gmail.com', 'Lili', 'Rubim', '12345678', '666555444', 'lili.jpg', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('fran@gmail.com', 'Fran', 'Ramírez', '12345678', '666555444', 'fran.jpg', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('noemi@gmail.com', 'Noemi', 'Herrera', '12345678', '666555444', 'noemi.jpg', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('yessenia@gmail.com', 'Yessenia', 'Cherrez', '12345678', '666555444', 'yessenia.png', 'ADMIN');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('alan@gmail.com', 'Alan', 'Sastre', 'user1234', '666777888', 'alan.jpg', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('angelmaria@gmail.com', 'Angel María', 'Martinez', 'user1234', '666777888', 'angelm.png', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('silvia@gmail.com', 'Silvia', 'Sanchez', 'user1234', '666777888', 'silvia.jpg', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('angelsc@gmail.com', 'Angel', 'Sanz', 'user1234', '666777888', 'angelsc.png', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('judith@gmail.com', 'Judith', 'Blandin', 'user1234', '666777888', 'judith.jpg', 'USER');
-INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role) VALUES ('@gmail.com', 'Javier', 'Baeza-Rojano', 'user1234', '666777888', 'javier.jpg', 'USER');
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('angel@gmail.com', 'Angel', 'Sigueros', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666555444', 'angel.jpg', 'ADMIN', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('lili@gmail.com', 'Lili', 'Rubim', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666555444', 'lili.jpg', 'ADMIN', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('fran@gmail.com', 'Fran', 'Ramírez', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666555444', 'fran.jpg', 'ADMIN', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('noemi@gmail.com', 'Noemi', 'Herrera', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666555444', 'noemi.jpg', 'ADMIN', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('yessenia@gmail.com', 'Yessenia', 'Cherrez', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666555444', 'yessenia.png', 'ADMIN', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('alan@gmail.com', 'Alan', 'Sastre', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'alan.jpg', 'USER', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('angelmaria@gmail.com', 'Angel María', 'Martinez', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'angelm.png', 'USER', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('silvia@gmail.com', 'Silvia', 'Sanchez', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'silvia.jpg', 'USER', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('angelsc@gmail.com', 'Angel', 'Sanz', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'angelsc.png', 'USER', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('judith@gmail.com', 'Judith', 'Blandin', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'judith.jpg', 'USER', 1);
+INSERT INTO sm_user (email, first_name, last_name, password, phone, photo_url, role, available) VALUES ('@gmail.com', 'Javier', 'Baeza-Rojano', '$2a$10$Da/0KQVt4FusDlhQk2n9Lu2olKG1aYB3.Bezn3DaH0kKngMxznP1W', '666777888', 'javier.jpg', 'USER', 1);
 -- sm_group
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Entusiastas de los paseos, respeto por la naturaleza', 'caminata.jpg', 'Sábado 08:00hrs, Parque del Buen Retiro', 'Caminatas');
 INSERT INTO sm_group (description, photo_url, rules, title) VALUES ('Enamorados de la fotografía, comparte tus mejores fotos y trucos', 'foto.jpg', ' Viernes 18:00hrs, Principe de Vergara 110', 'Club de Fotografía');
