@@ -39,7 +39,7 @@ public class SeniormeetApplication {
 				"Madrid",
 				Sexo.FEMENINO,
 				null,
-				null, true,
+				"avatar.png", true,
 				UserRole.USER, List.of(group1), null);
 		User user2 = new User(
 				null,
@@ -52,7 +52,7 @@ public class SeniormeetApplication {
 				"Madrid",
 				Sexo.FEMENINO,
 				null,
-				null, true,
+				"avatar.png", true,
 				UserRole.ADMIN, null, null);
 		userRepository.saveAll(List.of(user1, user2));
 
